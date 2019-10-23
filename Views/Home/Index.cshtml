@@ -45,6 +45,33 @@
             });
         }
 
+        function RunLoad() {
+            $.ajax({
+                url: '@Url.Action("Run", "Home")',
+                success: function (data) {
+                    $('#mainview').html(data);
+                }
+            });
+        }
+
+        function InstrumentLoad() {
+            $.ajax({
+                url: '@Url.Action("Instruments", "Home")',
+                success: function (data) {
+                    $('#mainview').html(data);
+                }
+            });
+        }
+
+        function MetricLoad() {
+            $.ajax({
+                url: '@Url.Action("Metrics", "Home")',
+                success: function (data) {
+                    $('#mainview').html(data);
+                }
+            });
+        }
+
     </script>
 
 </head>
@@ -76,6 +103,14 @@
                     Dashboard
                 </button>
                 <button class="nav-link btn btn-link" onclick="AdminLoad();">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    Instruments
+                </button>
+                <button class="nav-link btn btn-link" onclick="MetricLoad();">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    Metrics
+                </button>
+                <button class="nav-link btn btn-link" onclick="InstrumentLoad();">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Admin Settings
                 </button>
