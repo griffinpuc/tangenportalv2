@@ -14,5 +14,15 @@ namespace tangen_dataportal_version2.Controllers
         {
             return View();
         }
+
+        public IActionResult Main()
+        {
+            return View();
+        }
+
+        public IActionResult Admin()
+        {
+            return View();
+        }
     }
 }

@@ -22,13 +22,33 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous">
+            crossorigin="anonymous"></script>
+
+    <script>
+
+        function MainLoad() {
+            $.ajax({
+                url: '@Url.Action("Main", "Home")',
+                success: function (data) {
+                    $('#mainview').html(data);
+                }
+            });
+        }
+
+        function AdminLoad() {
+            $.ajax({
+                url: '@Url.Action("Admin", "Home")',
+                success: function (data) {
+                    $('#mainview').html(data);
+                }
+            });
+        }
 
     </script>
 
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="MainLoad();">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -49,20 +69,14 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                @using (Html.BeginForm("Index", "Home"))
-                {
-                    <button class="nav-link btn btn-link">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        Dashboard
-                    </button>
-                }
-                @using (Html.BeginForm("Index", "Home"))
-                {
-                    <button class="nav-link btn btn-link">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        Admin Settings
-                    </button>
-                }
+                <button class="nav-link btn btn-link" onclick="MainLoad();">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    Dashboard
+                </button>
+                <button class="nav-link btn btn-link" onclick="AdminLoad();">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    Admin Settings
+                </button>
             </li>
 
             <!-- Divider -->
@@ -128,46 +142,15 @@
 
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <div>
-                    <div class="container-fluid">
-
-                        <!-- Page Heading -->
-                        <h1 class="h3 mb-4 text-gray-800">some stats or something</h1>
-
-                        @for (int i = 0; i <= 10; i++)
-                        {
-                            <div class="card" style="width: 18rem; width: 60vw; text-align: center; left: auto; right: auto; margin-bottom: 1vh;">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-2" style="text-align: left;">
-                                            <h2>#runno</h2>
-                                        </div>
-                                        <div class="col" style="text-align: left;">
-                                            <h5 class="card-title">Something</h5>
-                                            <p class="card-text">Description of the content of the run, stats, etc...</p>
-                                        </div>
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-secondary">Left</button>
-                                                    <button type="button" class="btn btn-secondary">Middle</button>
-                                                    <button type="button" class="btn btn-secondary">Right</button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        }
-
-
-                    </div>
-                    <!-- /.container-fluid -->
+                <!-- Partial page begin-->
+                <div id="mainview">
+                        
+                    
 
                 </div>
+
+
+
             </div>
 
 
