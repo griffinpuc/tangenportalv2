@@ -1,33 +1,22 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace tangen-dataportal-version2.Models
+﻿namespace tangen
 {
-    public class RunMod
+    public abstract class RunMod
     {
+        public int Id { get; set; }
+        public string SampleId { get; set; }
+        public string UniqueId { get; set; }
+        public string DownloadDateTime { get; set; }
+        public string AssayId { get; set; }
+        public string KitLotId { get; set; }
+        public string InstrumentUuid { get; set; }
+        public string InstrumentName { get; set; }
 
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [JsonIgnore]
-        public int ID { get; set; }
-        public string sampleID { get; set; }
-        public string uniqueID { get; set; }
-        public string downloadDateTime { get; set; }
-        public string assayID { get; set; }
-        public string kitLotID { get; set; }
-        public string instrumentUUID { get; set; }
-        public string instrumentName { get; set; }
+        //[JsonIgnore]
+        public string RawAddress { get; set; }
 
-        [JsonIgnore]
-        public string rawAddress { get; set; }
-
-        [JsonIgnore]
+        //[JsonIgnore]
         //public ICollection<modelTag> tags { get; set; }
-
         //public ICollection<modelTarget> targets { get; set; }
         //public ICollection<modelWell> wells { get; set; }
-
     }
 }

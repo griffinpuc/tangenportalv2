@@ -65,7 +65,7 @@
 
         function MetricLoad() {
             $.ajax({
-                url: '@Url.Action("Metricso", "Home")',
+                url: '@Url.Action("Metrics", "Home")',
                 success: function (data) {
                     $('#mainview').html(data);
                 }
