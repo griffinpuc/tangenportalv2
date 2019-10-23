@@ -78,12 +78,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
 
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -105,32 +100,77 @@
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            
+                        </li>
+                    </ul>
+                </nav>
+
+
+
+                <!-- Tob Bar 2 -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4" style="margin-top: -3vh;">
+
+                    <h3>settigns, filters, and toggles will go up here</h3>
+
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                            <div class="container-fluid">
+                <div>
+                    <div class="container-fluid">
 
-                                <!-- Page Heading -->
-                                <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-4 text-gray-800">some stats or something</h1>
 
-
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Accordion -->
-                                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                        <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                                    </a>
-                                    <!-- Card Content - Collapse -->
-                                    <div class="collapse show" id="collapseCardExample">
-                                        <div class="card-body">
-                                            This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
+                        @for (int i = 0; i <= 10; i++)
+                        {
+                            <div class="card" style="width: 18rem; width: 60vw; text-align: center; left: auto; right: auto; margin-bottom: 1vh;">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-2" style="text-align: left;">
+                                            <h2>#runno</h2>
                                         </div>
+                                        <div class="col" style="text-align: left;">
+                                            <h5 class="card-title">Something</h5>
+                                            <p class="card-text">Description of the content of the run, stats, etc...</p>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-secondary">Left</button>
+                                                    <button type="button" class="btn btn-secondary">Middle</button>
+                                                    <button type="button" class="btn btn-secondary">Right</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
+
+
                                 </div>
-
                             </div>
-                <!-- /.container-fluid -->
+                        }
 
+
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
             </div>
+
+
             <!-- End of Main Content -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
