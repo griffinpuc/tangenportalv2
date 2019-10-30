@@ -1,6 +1,6 @@
 ﻿namespace tangen
 {
-    public abstract class RunMod
+    public class RunMod
     {
         public int Id { get; set; }
         public string SampleId { get; set; }
@@ -12,7 +12,7 @@
         public string InstrumentName { get; set; }
 
         //[JsonIgnore]
-        public string RawAddress { get; set; }
+        public string DirPointer { get; set; }
 
         //[JsonIgnore]
         //public ICollection<modelTag> tags { get; set; }

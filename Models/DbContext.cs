@@ -1,6 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Tools;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
-namespace tangen
+namespace tangen.Models
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
@@ -9,7 +14,22 @@ namespace tangen
         {
         }
 
-        public DbSet<RunMod> TrackersTable { get; set; }
+        public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<DbContext>
+        {
+            public DbContext CreateDbContext(string[] args)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+                var builder = new DbContextOptionsBuilder<DbContext>();
+                var connectionString = configuration.GetConnectionString("dbConnection");
+                builder.UseSqlServer(connectionString);
+                return new DbContext(builder.Options);
+            }
+        }
+
+        public DbSet<RunMod> RunTable { get; set; }
 
 
         public void AddEntry(object obj)
