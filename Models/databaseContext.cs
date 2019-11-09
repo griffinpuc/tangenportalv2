@@ -7,9 +7,9 @@ using System.IO;
 
 namespace tangen.Models
 {
-    public class DbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class databaseContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbContext(DbContextOptions<DbContext> options)
+        public databaseContext(DbContextOptions<DbContext> options)
             : base(options)
         {
         }

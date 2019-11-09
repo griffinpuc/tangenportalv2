@@ -13,12 +13,12 @@ namespace tangen_dataportal_version2.Controllers
     public class HomeController : Controller
     {
 
-        private DbContext _context;
+        //private DbContext _context;
 
-        public HomeController(DbContext context)
-        {
-            _context = context;
-        }
+        //public HomeController(DbContext context)
+        //{
+        //    _context = context;
+        //}
 
 
 
