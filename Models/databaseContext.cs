@@ -4,28 +4,29 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using JetBrains.Annotations;
 
 namespace tangen.Models
 {
-    public class databaseContext : Microsoft.EntityFrameworkCore.DbContext
+    public class databaseContext : DbContext
     {
-        public databaseContext(DbContextOptions<DbContext> options)
+        public databaseContext(DbContextOptions options)
             : base(options)
         {
         }
 
-        public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<DbContext>
+        public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<databaseContext>
         {
-            public DbContext CreateDbContext(string[] args)
+            public databaseContext CreateDbContext(string[] args)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
-                var builder = new DbContextOptionsBuilder<DbContext>();
+                var builder = new DbContextOptionsBuilder<databaseContext>();
                 var connectionString = configuration.GetConnectionString("dbConnection");
                 builder.UseSqlServer(connectionString);
-                return new DbContext(builder.Options);
+                return new databaseContext(builder.Options);
             }
         }
 

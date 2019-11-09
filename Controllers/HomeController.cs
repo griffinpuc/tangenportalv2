@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using tangen.Models;
 //using tangen_dataportal_version2.Models;
 
 namespace tangen_dataportal_version2.Controllers
@@ -13,13 +14,12 @@ namespace tangen_dataportal_version2.Controllers
     public class HomeController : Controller
     {
 
-        //private DbContext _context;
+        public databaseContext _context;
 
-        //public HomeController(DbContext context)
-        //{
-        //    _context = context;
-        //}
-
+        public HomeController(databaseContext context)
+        {
+            _context = context;
+        }
 
 
         public IActionResult Index()
