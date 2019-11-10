@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-//using tangen_dataportal_version2.Models;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using tangen.Models;
-//using tangen_dataportal_version2.Models;
 
-namespace tangen_dataportal_version2.Controllers
+namespace tangen.Controllers
 {
     public class HomeController : Controller
     {
@@ -21,9 +13,11 @@ namespace tangen_dataportal_version2.Controllers
             _context = context;
         }
 
-
         public IActionResult Index()
         {
+            RunMod test = new RunMod();
+            test.SampleId = "1";
+            _context.Add(test);
             return View();
         }
 
