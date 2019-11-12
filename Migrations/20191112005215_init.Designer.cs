@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using tangen.Models;
+using tangenportalv2.Models;
 
 namespace tangendataportalversion2.Migrations
 {
     [DbContext(typeof(databaseContext))]
-    [Migration("20191109235347_init")]
+    [Migration("20191112005215_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

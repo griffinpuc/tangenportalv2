@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using JetBrains.Annotations;
 
-namespace tangen.Models
+namespace tangenportalv2.Models
 {
     public class databaseContext : DbContext
     {

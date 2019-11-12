@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using tangen.Models;
+using tangenportalv2.Models;
 
-namespace tangen.Controllers
+namespace tangenportalv2.Controllers
 {
     public class HomeController : Controller
     {
@@ -17,7 +17,7 @@ namespace tangen.Controllers
         {
             RunMod test = new RunMod();
             test.SampleId = "1";
-            _context.Add(test);
+            _context.AddEntry(test);
             return View();
         }
 

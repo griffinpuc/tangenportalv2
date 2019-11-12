@@ -12540,9 +12540,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\griff\\Workspace\\tangenportalv2\\tangen-dataportal-version2\\tangen-dataportal-version2\\tangen-dataportal-version2.csproj",
-      "projectName": "tangen-dataportal-version2",
-      "projectPath": "C:\\Users\\griff\\Workspace\\tangenportalv2\\tangen-dataportal-version2\\tangen-dataportal-version2\\tangen-dataportal-version2.csproj",
+      "projectUniqueName": "C:\\Users\\griff\\Workspace\\tangenportalv2\\tangen-dataportal-version2\\tangen-dataportal-version2\\tangenportalv2.csproj",
+      "projectName": "tangenportalv2",
+      "projectPath": "C:\\Users\\griff\\Workspace\\tangenportalv2\\tangen-dataportal-version2\\tangen-dataportal-version2\\tangenportalv2.csproj",
       "packagesPath": "C:\\Users\\griff\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\griff\\Workspace\\tangenportalv2\\tangen-dataportal-version2\\tangen-dataportal-version2\\obj\\",
       "projectStyle": "PackageReference",

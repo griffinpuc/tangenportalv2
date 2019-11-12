@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using tangenportalv2.Models;
 
 namespace tangen_dataportal_version2
 {
@@ -21,7 +23,7 @@ namespace tangen_dataportal_version2
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container.    
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -31,8 +33,12 @@ namespace tangen_dataportal_version2
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //services.AddScoped<DbContextOptions>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<databaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("dbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
