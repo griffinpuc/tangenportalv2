@@ -30,7 +30,7 @@
 
         function MainLoad() {
             $.ajax({
-                url: '@Url.Action("Main", "Home")',
+                url: '@Url.Action("newui", "Home")',
                 success: function (data) {
                     $('#mainview').html(data);
                 }
@@ -143,26 +143,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-
-
-                <!-- Tob Bar 2 -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4" style="margin-top: -3vh;">
-
-                    <h3>settigns, filters, and toggles will go up here</h3>
-
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
