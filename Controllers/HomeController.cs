@@ -1,43 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using tangen_dataportal_version2.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using tangenportalv2.Models;
 
-namespace tangen_dataportal_version2.Controllers
+namespace tangenportalv2.Controllers
 {
     public class HomeController : Controller
     {
+
+        public databaseContext _context;
+
+        public HomeController(databaseContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            RunMod test = new RunMod();
+            test.SampleId = "1";
+            _context.AddEntry(test);
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
+        public IActionResult Main()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Admin()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+
+        public IActionResult Run()
+        {
+            return View();
+        }
+
+        public IActionResult Instruments()
+        {
+            return View();
+        }
+
+        public IActionResult Metrics()
+        {
+            return View();
         }
     }
 }
