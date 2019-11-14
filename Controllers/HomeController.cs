@@ -13,6 +13,11 @@ namespace tangenportalv2.Controllers
             _context = context;
         }
 
+        public IActionResult devtools()
+        {
+            return View();
+        }
+
         public IActionResult newui()
         {
             return View();

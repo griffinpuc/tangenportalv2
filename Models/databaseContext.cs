@@ -31,6 +31,7 @@ namespace tangenportalv2.Models
         }
 
         public DbSet<RunMod> RunTable { get; set; }
+        public DbSet<InstrumentMod> InstrumentTable { get; set; }
 
 
         public void AddEntry(object obj)
