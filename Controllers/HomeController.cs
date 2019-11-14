@@ -13,11 +13,13 @@ namespace tangenportalv2.Controllers
             _context = context;
         }
 
+        public IActionResult newui()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
-            RunMod test = new RunMod();
-            test.SampleId = "1";
-            _context.AddEntry(test);
             return View();
         }
 
