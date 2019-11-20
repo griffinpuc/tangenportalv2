@@ -43,24 +43,37 @@
                 <td>@batch.batchName</td>
                 <td>@batch.batchURL</td>
                 <td>
-                    <form asp-controller="home" asp-action="runbatch" method="get" style="float: left;">
-                        <input type="hidden" asp-for="@batch" name="category" />
-                        <button class="btn btn-default" style="margin: 2px;" type="submit"></button>
-                    </form>
+                    @using (Html.BeginForm("runBatch", "Home", FormMethod.Post))
+                    {
+                        <input type="hidden" value="@batch" name="batch" id="batch" />
+                        <button class="btn btn-default" style="margin: 2px;" type="submit">Run Batch</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("deleteBatch", "Home"))
+                    {
+                        @Html.Hidden("batch", batch)
+                        <input type="hidden" value="@batch" name="batch" id="batch" />
+                        <button class="btn btn-default" style="margin: 2px;" type="submit">Delete Batch</button>
+                    }
                 </td>
             </tr>
         }
-
-        <tr>
-            <form asp-controller="home" asp-action="addbatch" method="get" style="float: left;">
-                <td><input type="text" placeholder="Batch name" name="batchname" /></td>
-                <td><input type="text" placeholder="Batch URL" name="batchurl" /></td>
-                <td><button class="btn btn-default" style="margin: 2px;" type="submit">Add</button></td>
-            </form>
-        </tr>
-
     </table>
-</div>
+
+    @using (Html.BeginForm("addBatch", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td><input type="text" placeholder="Batch name" name="batchname" id="batchname" /></td>
+                <td><input type="text" placeholder="Batch URL" name="batchurl" id="batchurl" /></td>
+                <td><button class="btn btn-default" style="margin: 2px;" type="submit">Add</button></td>
+            </tr>
+        </table>
+    }
+
+
+    </div>
 
 <h3>Clean table:</h3>
 <div class="section">

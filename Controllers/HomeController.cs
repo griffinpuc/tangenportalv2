@@ -35,10 +35,19 @@ namespace tangenportalv2.Controllers
 
         }
 
-        //public IActionResult runBatch(BatchModel batch)
-        //{
-        //    batch.AddBatch(_context);
-        //}
+        public IActionResult deleteBatch(BatchModel batch)
+        {
+            _context.RemoveEntry(batch);
+
+            return RedirectToAction("devtools", "Home");
+        }
+
+        public IActionResult runBatch(int batch)
+        {
+            int i = batch;
+
+            return RedirectToAction("devtools", "Home");
+        }
 
         public IActionResult newui()
         {
@@ -47,7 +56,7 @@ namespace tangenportalv2.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("devtools", "Home");
         }
 
         public IActionResult Main()
