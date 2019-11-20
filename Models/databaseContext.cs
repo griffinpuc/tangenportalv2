@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using JetBrains.Annotations;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace tangenportalv2.Models
 {
@@ -32,6 +34,7 @@ namespace tangenportalv2.Models
 
         public DbSet<RunMod> RunTable { get; set; }
         public DbSet<InstrumentMod> InstrumentTable { get; set; }
+        public DbSet<BatchModel> BatchTable { get; set; }
 
 
         public void AddEntry(object obj)
@@ -52,6 +55,17 @@ namespace tangenportalv2.Models
         {
             Update(obj);
             SaveChanges();
-        } 
+        }
+
+        public BatchModel[] getBatches()
+        {
+            return (from BatchModel in BatchTable select BatchModel).ToArray();
+        }
+
+        //public bool ClearAllRuns()
+        //{
+        //    bool retval = false;
+        //    RunMod[] =from modelTarget in modelTarget where modelTarget.DataID == dataTableID select modelTarget).ToList().ToArray();
+        //}
     }
 }

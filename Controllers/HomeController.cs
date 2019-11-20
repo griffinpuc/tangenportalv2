@@ -15,8 +15,30 @@ namespace tangenportalv2.Controllers
 
         public IActionResult devtools()
         {
-            return View();
+            Nugget nug = new Nugget();
+
+            nug.batches = _context.getBatches();
+
+            return View(nug);
         }
+
+        public IActionResult addBatch(string batchname, string batchurl)
+        {
+            _context.AddEntry(
+                new BatchModel()
+                { 
+                    batchName = batchname,
+                    batchURL = batchurl
+                });
+
+            return RedirectToAction("devtools", "Home");
+
+        }
+
+        //public IActionResult runBatch(BatchModel batch)
+        //{
+        //    batch.AddBatch(_context);
+        //}
 
         public IActionResult newui()
         {

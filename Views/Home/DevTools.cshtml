@@ -1,20 +1,23 @@
-﻿<style>
+﻿@model tangenportalv2.Models.Nugget
+
+@using tangenportalv2.Models;
+
+<style>
 
     th, td {
         border: 1px solid black;
         padding: 10px;
     }
 
-    table{
-        border: 1px solid black;    
+    table {
+        border: 1px solid black;
         margin-top: 5vh;
     }
 
-    .section{
+    .section {
         margin-left: 25px;
         margin-bottom: 5vh;
     }
-
 </style>
 
 <h2>DevTools</h2>
@@ -34,10 +37,26 @@
             <th></th>
         </tr>
 
+        @foreach (BatchModel batch in Model.batches)
+        {
+            <tr>
+                <td>@batch.batchName</td>
+                <td>@batch.batchURL</td>
+                <td>
+                    <form asp-controller="home" asp-action="runbatch" method="get" style="float: left;">
+                        <input type="hidden" asp-for="@batch" name="category" />
+                        <button class="btn btn-default" style="margin: 2px;" type="submit"></button>
+                    </form>
+                </td>
+            </tr>
+        }
+
         <tr>
-            <td></td>
-            <td></td>
-            <td><button>Run</button></td>
+            <form asp-controller="home" asp-action="addbatch" method="get" style="float: left;">
+                <td><input type="text" placeholder="Batch name" name="batchname" /></td>
+                <td><input type="text" placeholder="Batch URL" name="batchurl" /></td>
+                <td><button class="btn btn-default" style="margin: 2px;" type="submit">Add</button></td>
+            </form>
         </tr>
 
     </table>
