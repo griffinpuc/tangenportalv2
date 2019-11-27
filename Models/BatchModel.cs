@@ -20,13 +20,21 @@ namespace tangenportalv2.Models
             return JsonConvert.DeserializeObject<RunMod>(System.IO.File.ReadAllText(fileurl));
         }
         
-        public void AddBatch(databaseContext context)
+        public void addBatch(databaseContext context)
         {
             foreach(string fileurl in Directory.GetFiles(batchURL))
             {
                 SerializeFile(fileurl);
             }
             
+        }
+
+        public void runBatch(databaseContext context)
+        {
+            foreach(FileInfo file in new DirectoryInfo(this.batchURL).GetFiles("*.json"))
+            {
+                context.AddEntry(JsonConvert.DeserializeObject<RunMod>(File.ReadAllText(file.ToString())));
+            }
         }
 
     }

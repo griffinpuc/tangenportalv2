@@ -45,7 +45,7 @@
                 <td>
                     @using (Html.BeginForm("runBatch", "Home", FormMethod.Post))
                     {
-                        <input type="hidden" value="@batch" name="batch" id="batch" />
+                        <input type="hidden" value="@batch.ID" name="batchid" id="batchid" />
                         <button class="btn btn-default" style="margin: 2px;" type="submit">Run Batch</button>
                     }
                 </td>

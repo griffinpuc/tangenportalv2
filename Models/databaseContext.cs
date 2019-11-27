@@ -62,6 +62,11 @@ namespace tangenportalv2.Models
             return (from BatchModel in BatchTable select BatchModel).ToArray();
         }
 
+        public BatchModel getBatch(int id)
+        {
+            return(from BatchModel in BatchTable where BatchModel.ID == id select BatchModel).FirstOrDefault();
+        }
+
         //public bool ClearAllRuns()
         //{
         //    bool retval = false;

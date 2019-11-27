@@ -42,9 +42,9 @@ namespace tangenportalv2.Controllers
             return RedirectToAction("devtools", "Home");
         }
 
-        public IActionResult runBatch(int batch)
+        public IActionResult runBatch(int batchid)
         {
-            int i = batch;
+            _context.getBatch(batchid).runBatch(_context);
 
             return RedirectToAction("devtools", "Home");
         }
@@ -56,7 +56,7 @@ namespace tangenportalv2.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("devtools", "Home");
+            return View();
         }
 
         public IActionResult Main()
