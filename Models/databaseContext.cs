@@ -74,7 +74,7 @@ namespace tangenportalv2.Models
 
         public RunMod getRun(int id)
         {
-            return (from RunMod in RunTable where RunMod.Id == id select RunMod).FirstOrDefault();
+            return (from RunMod in RunTable where RunMod.Id == id select RunMod).Include(p => p.targets).FirstOrDefault();
         }
 
         public void removeRuns()

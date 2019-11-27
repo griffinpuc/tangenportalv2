@@ -31,27 +31,31 @@
     <div id="wrapper">
         <div class="row">
             <div class="col" style="text-align: center; margin: 0 auto; position: absolute; left:25px; right:25px; width: auto; top: 25px;">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Data</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">JSON</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Raw</a>
-                            </li>
-                        </ul>
-                    </div>
+
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">JSON</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Raw</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="partialview" class="card text-center">
                     <div class="card-body" style="text-align: left;">
+
                         <pre class="prettyprint">
                             @Model.run.getJSON()
                         </pre>
-                        
+
                     </div>
                 </div>
+
+
             </div>
         </div>
 

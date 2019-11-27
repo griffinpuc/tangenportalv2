@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Home\dev\" />
+    <Folder Include="Views\RunView\" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,5 @@ namespace tangenportalv2.Models
         public string wellId { get; set; }
         public string species { get; set; }
         public string cq { get; set; }
-
     }
 }

@@ -13,36 +13,47 @@
 
     @foreach (RunMod run in Model.runs)
     {
-    <div class="card animated bounceInUp" style="border-left-color: cornflowerblue; border-left-width: 7px; width: 18rem; width: 60vw; height:60px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
-        <div class="card-body">
-            <div class="row" style="margin-top: -1vh;">
-                <div class="col-sm-1" style="font-weight: bold; ">
-                    #@run.assayId
+        <div class="card animated bounceInUp" style="border-left-color: cornflowerblue; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col">
+                        <div class="row">
+                            <div class="col" style="font-weight: bolder; ">
+                                #@run.assayId
+                            </div>
+                            <div class="col">
+                                <div class="row" style="color: cornflowerblue; font-weight: bold;">
+                                    @run.dateTime.Split("T")[0]
+                                </div>
+                                <div class="row" style="color: cornflowerblue;">
+                                    @run.dateTime.Split("T")[1].Replace("Z", "")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="row" style="text-align: right;">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                @using (Html.BeginForm("ViewRun", "Home", FormMethod.Post, new { target = "_blank" }))
+                                {
+                                    <input hidden value="@run.Id" id="runid" name="runid" />
+                                    <button class="btn btn-sm btn-primary" style="margin-right: 10px;">View  <i class="far fa-chart-bar"></i></button>
+                                }
+                                @using (Html.BeginForm("DownloadRun", "Home", FormMethod.Post))
+                                {
+                                    <button class="btn btn-sm btn-secondary">Download Archive  <i class="fas fa-download"></i></button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-sm-3">
-                    @run.dateTime
-                </div>
-                <div class="col-sm-4">
-                    @run.uniqueId
-                </div>
-                <div class="col-sm-1">
-                    @using (Html.BeginForm("ViewRun", "Home", FormMethod.Post))
-                    {
-                        <input hidden value="@run.Id" id="runid" name="runid" />
-                        <button class="btn btn-sm btn-primary">View</button>
-                    }
-                </div>
-                <div class="col-sm-2">
-                    @using (Html.BeginForm("DownloadRun", "Home", FormMethod.Post))
-                    {
-                        <button class="btn btn-sm" style="background-color: #FE6505; color: white;">Download Zip</button>
-                    }
-                </div>
+
             </div>
-
-
         </div>
-    </div>
     }
 
 

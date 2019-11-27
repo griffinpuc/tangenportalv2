@@ -18,9 +18,9 @@ namespace tangenportalv2.Models
         public string instrumentUuid { get; set; }
         public string instrumentName { get; set; }
 
-        public ICollection<ResultMod> results { get; set; }
-        public ICollection<TargetMod> targets { get; set; }
-        public ICollection<WellMod> wells { get; set; }
+        public virtual ICollection<ResultMod> results { get; set; }
+        public virtual ICollection<TargetMod> targets { get; set; }
+        public virtual ICollection<WellMod> wells { get; set; }
 
         [JsonIgnore]
         public string DirPointer { get; set; }

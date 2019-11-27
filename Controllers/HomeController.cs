@@ -70,7 +70,7 @@ namespace tangenportalv2.Controllers
         public IActionResult ViewRun(int runid)
         {
             RunMod run = _context.getRun(runid);
-            return View(new Nugget() { run= run });
+            return View( new Nugget() { run= run });
         }
 
         public IActionResult Main()
