@@ -11,6 +11,8 @@ namespace tangenportalv2.Models
         public BatchModel[] batches { get; set; }
         public InstrumentMod[] instruments { get; set; }
         public RunMod[] runs { get; set; }
+        public RunMod run { get; set; }
+        public string jsonrun { get; set; }
 
     }
 }

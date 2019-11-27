@@ -67,6 +67,24 @@ namespace tangenportalv2.Models
             return(from BatchModel in BatchTable where BatchModel.ID == id select BatchModel).FirstOrDefault();
         }
 
+        public RunMod[] getRuns()
+        {
+            return (from RunMod in RunTable select RunMod).ToArray();
+        }
+
+        public RunMod getRun(int id)
+        {
+            return (from RunMod in RunTable where RunMod.Id == id select RunMod).FirstOrDefault();
+        }
+
+        public void removeRuns()
+        {
+            foreach(RunMod run in getRuns())
+            {
+                RemoveEntry(run);
+            }
+        }
+
         //public bool ClearAllRuns()
         //{
         //    bool retval = false;

@@ -1,15 +1,17 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using tangenportalv2.Models;
 
-namespace tangenportalv2
+namespace tangenportalv2.Models
 {
     public class RunMod
     {
         public int Id { get; set; }
         public string sampleId { get; set; }
         public string uniqueId { get; set; }
-        public string downloadDateTime { get; set; }
+        public string dateTime { get; set; }
         public string assayId { get; set; }
         public string assayName { get; set; }
         public string kitLotId { get; set; }
@@ -23,6 +25,9 @@ namespace tangenportalv2
         [JsonIgnore]
         public string DirPointer { get; set; }
 
-
+        public string getJSON()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
     }
 }

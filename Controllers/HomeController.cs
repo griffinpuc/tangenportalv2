@@ -22,6 +22,13 @@ namespace tangenportalv2.Controllers
             return View(nug);
         }
 
+        public IActionResult removeAllRun()
+        {
+            _context.removeRuns();
+
+            return RedirectToAction("newui", "Home");
+        }
+
         public IActionResult addBatch(string batchname, string batchurl)
         {
             _context.AddEntry(
@@ -49,9 +56,10 @@ namespace tangenportalv2.Controllers
             return RedirectToAction("devtools", "Home");
         }
 
-        public IActionResult newui()
+        public IActionResult runMain()
         {
-            return View();
+            RunMod[] r = _context.getRuns();
+            return View(new Nugget() { runs = _context.getRuns() });
         }
 
         public IActionResult Index()
@@ -59,9 +67,16 @@ namespace tangenportalv2.Controllers
             return View();
         }
 
+        public IActionResult ViewRun(int runid)
+        {
+            RunMod run = _context.getRun(runid);
+            return View(new Nugget() { run= run });
+        }
+
         public IActionResult Main()
         {
-            return View();
+            
+            return View(new Nugget() { runs = _context.getRuns() });
         }
 
         public IActionResult Admin()
