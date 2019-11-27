@@ -20,7 +20,6 @@ C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-datapo
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\Admin.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\Instruments.cshtml.g.cs
-C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\Main.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\Metrics.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\Run.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\tangenportalv2.RazorTargetAssemblyInfo.cache
@@ -29,3 +28,6 @@ C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-datapo
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\tangenportalv2.csproj.CopyComplete
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\tangenportalv2.dll
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\tangenportalv2.pdb
+C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\DevTools.cshtml.g.cs
+C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\RunMain.cshtml.g.cs
+C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\ViewRun.cshtml.g.cs

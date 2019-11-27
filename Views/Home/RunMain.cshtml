@@ -1,0 +1,49 @@
+﻿@model tangenportalv2.Models.Nugget;
+@using tangenportalv2.Models;
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-2">
+            
+        </div>
+    </div>
+
+
+
+    @foreach (RunMod run in Model.runs)
+    {
+    <div class="card animated bounceInUp" style="border-left-color: cornflowerblue; border-left-width: 7px; width: 18rem; width: 60vw; height:60px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
+        <div class="card-body">
+            <div class="row" style="margin-top: -1vh;">
+                <div class="col-sm-1" style="font-weight: bold; ">
+                    #@run.assayId
+                </div>
+                <div class="col-sm-3">
+                    @run.dateTime
+                </div>
+                <div class="col-sm-4">
+                    @run.uniqueId
+                </div>
+                <div class="col-sm-1">
+                    @using (Html.BeginForm("ViewRun", "Home", FormMethod.Post))
+                    {
+                        <input hidden value="@run.Id" id="runid" name="runid" />
+                        <button class="btn btn-sm btn-primary">View</button>
+                    }
+                </div>
+                <div class="col-sm-2">
+                    @using (Html.BeginForm("DownloadRun", "Home", FormMethod.Post))
+                    {
+                        <button class="btn btn-sm" style="background-color: #FE6505; color: white;">Download Zip</button>
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    }
+
+
+</div>

@@ -1,0 +1,104 @@
+﻿@model tangenportalv2.Models.Nugget
+
+@using tangenportalv2.Models;
+
+<style>
+
+    th, td {
+        border: 1px solid black;
+        padding: 10px;
+    }
+
+    table {
+        border: 1px solid black;
+        margin-top: 5vh;
+    }
+
+    .section {
+        margin-left: 25px;
+        margin-bottom: 5vh;
+    }
+</style>
+
+<h2>DevTools</h2>
+
+<hr />
+
+<h3>Database populate</h3>
+<div class="section">
+
+    <p>Upload run batch:</p>
+    <input type="file" />
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th></th>
+        </tr>
+
+        @foreach (BatchModel batch in Model.batches)
+        {
+            <tr>
+                <td>@batch.batchName</td>
+                <td>@batch.batchURL</td>
+                <td>
+                    @using (Html.BeginForm("runBatch", "Home", FormMethod.Post))
+                    {
+                        <input type="hidden" value="@batch.ID" name="batchid" id="batchid" />
+                        <button class="btn btn-default" style="margin: 2px;" type="submit">Run Batch</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("deleteBatch", "Home"))
+                    {
+                        @Html.Hidden("batch", batch)
+                        <input type="hidden" value="@batch" name="batch" id="batch" />
+                        <button class="btn btn-default" style="margin: 2px;" type="submit">Delete Batch</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+    @using (Html.BeginForm("addBatch", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td><input type="text" placeholder="Batch name" name="batchname" id="batchname" /></td>
+                <td><input type="text" placeholder="Batch URL" name="batchurl" id="batchurl" /></td>
+                <td><button class="btn btn-default" style="margin: 2px;" type="submit">Add</button></td>
+            </tr>
+        </table>
+    }
+
+
+    </div>
+
+<h3>Clean table:</h3>
+<div class="section">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Entries</th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <td>Runs</td>
+            <td>???</td>
+            <td><button>Delete</button></td>
+        </tr>
+
+        <tr>
+            <td>Instruments</td>
+            <td>???</td>
+            <td><button>Delete</button></td>
+        </tr>
+
+    </table>
+</div>
+
+
+
+

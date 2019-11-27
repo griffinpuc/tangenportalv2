@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tangenportalv2.Models;
 
 namespace tangendataportalversion2.Migrations
 {
     [DbContext(typeof(databaseContext))]
-    partial class databaseContextModelSnapshot : ModelSnapshot
+    [Migration("20191127142220_newmodels")]
+    partial class newmodels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,35 +78,6 @@ namespace tangendataportalversion2.Migrations
                     b.ToTable("ResultMod");
                 });
 
-            modelBuilder.Entity("tangenportalv2.Models.RunMod", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DirPointer");
-
-                    b.Property<string>("assayId");
-
-                    b.Property<string>("assayName");
-
-                    b.Property<string>("dateTime");
-
-                    b.Property<string>("instrumentName");
-
-                    b.Property<string>("instrumentUuid");
-
-                    b.Property<string>("kitLotId");
-
-                    b.Property<string>("sampleId");
-
-                    b.Property<string>("uniqueId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RunTable");
-                });
-
             modelBuilder.Entity("tangenportalv2.Models.TargetMod", b =>
                 {
                     b.Property<int>("Id")
@@ -149,23 +122,52 @@ namespace tangendataportalversion2.Migrations
                     b.ToTable("WellMod");
                 });
 
+            modelBuilder.Entity("tangenportalv2.RunMod", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DirPointer");
+
+                    b.Property<string>("assayId");
+
+                    b.Property<string>("assayName");
+
+                    b.Property<string>("downloadDateTime");
+
+                    b.Property<string>("instrumentName");
+
+                    b.Property<string>("instrumentUuid");
+
+                    b.Property<string>("kitLotId");
+
+                    b.Property<string>("sampleId");
+
+                    b.Property<string>("uniqueId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RunTable");
+                });
+
             modelBuilder.Entity("tangenportalv2.Models.ResultMod", b =>
                 {
-                    b.HasOne("tangenportalv2.Models.RunMod")
+                    b.HasOne("tangenportalv2.RunMod")
                         .WithMany("results")
                         .HasForeignKey("RunModId");
                 });
 
             modelBuilder.Entity("tangenportalv2.Models.TargetMod", b =>
                 {
-                    b.HasOne("tangenportalv2.Models.RunMod")
+                    b.HasOne("tangenportalv2.RunMod")
                         .WithMany("targets")
                         .HasForeignKey("RunModId");
                 });
 
             modelBuilder.Entity("tangenportalv2.Models.WellMod", b =>
                 {
-                    b.HasOne("tangenportalv2.Models.RunMod")
+                    b.HasOne("tangenportalv2.RunMod")
                         .WithMany("wells")
                         .HasForeignKey("RunModId");
                 });

@@ -17,6 +17,7 @@
     <link href="~/css/sb-admin-2.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="~/js/sb-admin-2.js"></script>
+    <link href="~/css/animate.css" rel="stylesheet" />
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -30,7 +31,7 @@
 
         function MainLoad() {
             $.ajax({
-                url: '@Url.Action("Main", "Home")',
+                url: '@Url.Action("runMain", "Home")',
                 success: function (data) {
                     $('#mainview').html(data);
                 }
@@ -39,7 +40,7 @@
 
         function AdminLoad() {
             $.ajax({
-                url: '@Url.Action("Admin", "Home")',
+                url: '@Url.Action("devtools", "Home")',
                 success: function (data) {
                     $('#mainview').html(data);
                 }
@@ -111,7 +112,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Metrics
                 </button>
-                <button class="nav-link btn btn-link" onclick="InstrumentLoad();">
+                <button class="nav-link btn btn-link" onclick="AdminLoad();">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Admin Settings
                 </button>
@@ -143,26 +144,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-
-
-                <!-- Tob Bar 2 -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4" style="margin-top: -3vh;">
-
-                    <h3>settigns, filters, and toggles will go up here</h3>
-
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
