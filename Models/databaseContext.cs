@@ -12,6 +12,7 @@ namespace tangenportalv2.Models
 {
     public class databaseContext : DbContext
     {
+
         public databaseContext(DbContextOptions options)
             : base(options)
         {
@@ -67,9 +68,14 @@ namespace tangenportalv2.Models
             return(from BatchModel in BatchTable where BatchModel.ID == id select BatchModel).FirstOrDefault();
         }
 
-        public RunMod[] getRuns()
+        public double countRuns()
         {
-            return (from RunMod in RunTable select RunMod).ToArray();
+            return (from RunMod in RunTable select RunMod).Count();
+        }
+
+        public RunMod[] getRuns(int pagenum)
+        {
+            return (from RunMod in RunTable select RunMod).Skip(pagenum*10).Take(10).ToArray();
         }
 
         public RunMod getRun(int id)
@@ -79,7 +85,7 @@ namespace tangenportalv2.Models
 
         public void removeRuns()
         {
-            foreach(RunMod run in getRuns())
+            foreach(RunMod run in getRuns(1))
             {
                 RemoveEntry(run);
             }

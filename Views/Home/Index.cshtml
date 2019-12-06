@@ -47,9 +47,10 @@
             });
         }
 
-        function RunLoad() {
+        function RunLoad(pagenum) {
             $.ajax({
-                url: '@Url.Action("Run", "Home")',
+                url: '@Url.Action("runMain", "Home")',
+                data: { pagenum },
                 success: function (data) {
                     $('#mainview').html(data);
                 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using tangenportalv2.Models;
 
 namespace tangenportalv2.Controllers
@@ -21,6 +22,7 @@ namespace tangenportalv2.Controllers
 
             return View(nug);
         }
+
 
         public IActionResult removeAllRun()
         {
@@ -56,10 +58,10 @@ namespace tangenportalv2.Controllers
             return RedirectToAction("devtools", "Home");
         }
 
-        public IActionResult runMain()
+        public IActionResult runMain(int? pagenum)
         {
-            RunMod[] r = _context.getRuns();
-            return View(new Nugget() { runs = _context.getRuns() });
+            Nugget n = new Nugget() { runs = _context.getRuns(pagenum ?? 0), pagetotal = Math.Ceiling(_context.countRuns() / 10) };
+            return View(new Nugget() { runs = _context.getRuns(pagenum ?? 0), pagetotal = Math.Ceiling(_context.countRuns()/10) });
         }
 
         public IActionResult Index()
@@ -73,11 +75,10 @@ namespace tangenportalv2.Controllers
             return View( new Nugget() { run= run });
         }
 
-        public IActionResult Main()
-        {
-            
-            return View(new Nugget() { runs = _context.getRuns() });
-        }
+        //public IActionResult Main()
+        //{
+        //    return View(new Nugget() { runs = _context.getRuns() });
+        //}
 
         public IActionResult Admin()
         {

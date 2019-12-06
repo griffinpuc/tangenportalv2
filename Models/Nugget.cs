@@ -13,6 +13,8 @@ namespace tangenportalv2.Models
         public RunMod[] runs { get; set; }
         public RunMod run { get; set; }
         public string jsonrun { get; set; }
+        public int pagenum { get; set; }
+        public double pagetotal { get; set; }
 
     }
 }
