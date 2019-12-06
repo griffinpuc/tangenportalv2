@@ -1,6 +1,8 @@
 ﻿@model tangenportalv2.Models.Nugget;
 @using tangenportalv2.Models;
 
+<script src="~/js/pace.js"></script>
+
 <div class="container-fluid">
 
     <div class="row">
@@ -10,10 +12,9 @@
     </div>
 
 
-
     @foreach (RunMod run in Model.runs)
     {
-        <div class="card animated bounceInUp" style="border-left-color: cornflowerblue; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
+        <div class="card animated bounceInLeft" style="border-left-color: cornflowerblue; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
             <div class="card-body">
 
                 <div class="row">
@@ -56,14 +57,56 @@
         </div>
     }
 
+    @for (int missrun = 1; missrun <= 10 - Model.runs.Length; missrun++)
+    {
+        <div class="card animated bounceInLeft" style="border-left-color: lightgray; background-color:whitesmoke; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col">
+                        <div class="row">
+                            <div class="col" style="font-weight: bolder; ">
+                            </div>
+                            <div class="col">
+                                <div class="row" style="color: lightgray; font-weight: bold;">
+                                </div>
+                                <div class="row" style="color: lightgray;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+
+            @Html.Raw((Model.pagenum == 0) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Previous</button>" : "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\">Previous</button>")
+
+
+
             @for (int pnum = 0; pnum < Model.pagetotal; pnum++)
             {
-                <button onclick="RunLoad(@pnum);" class="btn btn-link" style="margin-right: 10px;">@pnum</button>
+                int displaynum = pnum + 1;
+                if (pnum == Model.pagenum)
+                {
+                    <button class="btn btn-link" disabled>@displaynum</button>
+                }
+                else
+                {
+                    <button onclick="RunLoad(@pnum);" class="btn btn-link">@displaynum</button>
+                }
+
             }
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <button onclick="RunLoad(@Model.pagenum+1);" class="btn btn-link">Next</button>
         </ul>
     </nav>
 </div>

@@ -55,13 +55,12 @@ namespace tangenportalv2.Controllers
         {
             _context.getBatch(batchid).runBatch(_context);
 
-            return RedirectToAction("devtools", "Home");
+            return RedirectToAction("runMain", "Home");
         }
 
         public IActionResult runMain(int? pagenum)
         {
-            Nugget n = new Nugget() { runs = _context.getRuns(pagenum ?? 0), pagetotal = Math.Ceiling(_context.countRuns() / 10) };
-            return View(new Nugget() { runs = _context.getRuns(pagenum ?? 0), pagetotal = Math.Ceiling(_context.countRuns()/10) });
+            return View(new Nugget() { runs = _context.getRuns(pagenum ?? 0), pagetotal = Math.Ceiling(_context.countRuns()/10), pagenum = pagenum ?? 0 });
         }
 
         public IActionResult Index()
