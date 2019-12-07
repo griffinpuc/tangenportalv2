@@ -1,54 +1,214 @@
-﻿<script src="~/js/pace.js"></script>
+﻿<!DOCTYPE html>
+<html lang="en">
 
-<script>
+<head>
 
-    function RefreshInstruments() {
-        $.ajax({
-            url: '@Url.Action("RefreshInstruments", "Home")',
-            success: function (data) {
-                $('#instrumentView').html(data);
-            }
-        });
-    }
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-</script>
+    <title>TangenPortal</title>
 
-<div class="container-fluid">
+    <!-- Custom fonts for this template-->
+    <script src="https://kit.fontawesome.com/2f4791119e.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/css/sb-admin-2.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="~/js/sb-admin-2.js"></script>
+    <link href="~/css/animate.css" rel="stylesheet" />
 
-    <div class="row animated bounceInLeft" style="margin-bottom: 50px;">
-        <div class="col">
-            <div class="card" style="border: 3.5px solid #f0f0f0;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <h3>Add Instrument</h3>
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous">
+    </script>
+
+    <link href="~/css/load-min.css" rel="stylesheet" />
+
+    <script>
+
+        function RefreshInstruments() {
+            $.ajax({
+                url: '@Url.Action("RefreshInstruments", "Home")',
+                success: function (data) {
+                    $('#instrumentView').html(data);
+                }
+            });
+        }
+
+    </script>
+
+</head>
+
+<body id="page-top" onload="MainLoad();">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Index">
+                <div class="sidebar-brand-text mx-3">Tangen Portal <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Home/Index"><i class="fas fa-home"></i>Dashboard</a>
+                <a class="nav-link" href="/Home/Instruments"><i class="fas fa-robot"></i>Instruments</a>
+                <a class="nav-link" href="/Home/DevTools"><i class="fas fa-tools"></i>Admin Settings</a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                        @using (Html.BeginForm("addInstrument", "Home", FormMethod.Post))
-                        {
-                            <div class="form-inline">
-                                <div class="col">
-                                    <input class="form-control" placeholder="Nickname" type="text" name="nickname" />
-                                </div>
-                                <div class="col">
-                                    <input class="form-control" placeholder="Address" type="text" name="address" />
-                                </div>
-                                <div class="col">
-                                    <button type="submit" onclick="RefreshInstruments()" class="btn btn-primary">Add</button>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <!-- Partial page begin-->
+                <div id="mainview">
+
+                    <div class="container-fluid">
+
+                        <div class="row animated bounceInLeft" style="margin-bottom: 50px;">
+                            <div class="col">
+                                <div class="card" style="border: 3.5px solid #f0f0f0;">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <h3>Add Instrument</h3>
+                                            </div>
+                                            @using (Html.BeginForm("addInstrument", "Home", FormMethod.Post))
+                                            {
+                                                <div class="form-inline">
+                                                    <div class="col">
+                                                        <input class="form-control" placeholder="Nickname" type="text" name="nickname" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <input class="form-control" placeholder="Address" type="text" name="address" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="submit" onclick="RefreshInstruments()" class="btn btn-primary">Add</button>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        }
                         </div>
+
+                        <div id="instrumentView" class="row" onload="RefreshInstruments()">
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Griffin Puc 2019</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="instrumentView" class="row" onload="RefreshInstruments()">
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-    </div>
+</body>
 
-
-</div>
+</html>
 
