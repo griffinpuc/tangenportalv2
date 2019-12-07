@@ -1,7 +1,17 @@
-﻿@model tangenportalv2.Models.Nugget;
-@using tangenportalv2.Models;
+﻿<script src="~/js/pace.js"></script>
 
-<script src="~/js/pace.js"></script>
+<script>
+
+    function RefreshInstruments() {
+        $.ajax({
+            url: '@Url.Action("RefreshInstruments", "Home")',
+            success: function (data) {
+                $('#instrumentView').html(data);
+            }
+        });
+    }
+
+</script>
 
 <div class="container-fluid">
 
@@ -13,34 +23,30 @@
                         <div class="col-sm-2">
                             <h3>Add Instrument</h3>
                         </div>
-                        <div class="col-sm-2">
-                            <input class="form-control" placeholder="Device name" type="text" />
+                        @using (Html.BeginForm("addInstrument", "Home", FormMethod.Post))
+                        {
+                            <div class="form-inline">
+                                <div class="col">
+                                    <input class="form-control" placeholder="Nickname" type="text" name="nickname" />
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" placeholder="Address" type="text" name="address" />
+                                </div>
+                                <div class="col">
+                                    <button type="submit" onclick="RefreshInstruments()" class="btn btn-primary">Add</button>
+                                </div>
+                            </div>
+                        }
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="card animated bounceInLeft" style="width: 18rem; box-shadow: #f0f0f0 4px 4px;">
-                <img src="https://www.syfy.com/sites/syfy/files/styles/syfy_cast_detail_smartphone_narrow_1x/public/cast_futurama_bender_0.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
+    <div id="instrumentView" class="row" onload="RefreshInstruments()">
+
+
+
     </div>
 
 

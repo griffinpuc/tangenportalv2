@@ -83,6 +83,11 @@ namespace tangenportalv2.Models
             return (from RunMod in RunTable where RunMod.Id == id select RunMod).Include(p => p.targets).FirstOrDefault();
         }
 
+        public InstrumentMod[] getInstruments()
+        {
+            return (from InstrumentMod in InstrumentTable select InstrumentMod).ToArray();
+        }
+
         public void removeRuns()
         {
             foreach(RunMod run in getRuns(1))

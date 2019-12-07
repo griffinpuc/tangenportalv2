@@ -1,0 +1,24 @@
+﻿@model tangenportalv2.Models.Nugget;
+@using tangenportalv2.Models;
+
+@foreach (InstrumentMod instrument in Model.instruments)
+{
+    <div class="col-sm-2">
+        <div class="card animated bounceInLeft" style="width: 18rem; box-shadow: #f0f0f0 4px 4px;">
+            <img src="https://www.syfy.com/sites/syfy/files/styles/syfy_cast_detail_smartphone_narrow_1x/public/cast_futurama_bender_0.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+}

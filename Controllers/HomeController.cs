@@ -63,6 +63,16 @@ namespace tangenportalv2.Controllers
             return View(new Nugget() { runs = _context.getRuns(pagenum ?? 0), pagetotal = Math.Ceiling(_context.countRuns()/10), pagenum = pagenum ?? 0 });
         }
 
+        public void addInstrument(string nickname, string address)
+        {
+            _context.AddEntry(new InstrumentMod { name=nickname, localAddress=address });
+        }
+
+        public IActionResult instrumentView()
+        {
+            return View(new Nugget() { instruments=_context.getInstruments() });
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -73,11 +83,6 @@ namespace tangenportalv2.Controllers
             RunMod run = _context.getRun(runid);
             return View( new Nugget() { run= run });
         }
-
-        //public IActionResult Main()
-        //{
-        //    return View(new Nugget() { runs = _context.getRuns() });
-        //}
 
         public IActionResult Admin()
         {
