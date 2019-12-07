@@ -107,12 +107,12 @@
 
                         <div class="row animated bounceInLeft" style="margin-bottom: 50px;">
                             <div class="col">
-                                <div class="card" style="border: 3.5px solid #f0f0f0;">
+                                <div class="card" style="border: 3.5px solid #f0f0f0; width: 900px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-2">
-                                                <h3>Add Instrument</h3>
-                                            </div>
+                                            <h3 style="margin-left: 15px;">Add Instrument</h3>
+                                        </div>
+                                        <div class="row">
                                             @using (Html.BeginForm("addInstrument", "Home", FormMethod.Post))
                                             {
                                                 <div class="form-inline">
@@ -136,7 +136,7 @@
                         <div class="row">
                             @foreach (InstrumentMod instrument in Model.instruments)
                             {
-                                <div class="col-sm-2">
+                                <div class="col-sm-2" style="margin-right: 5px;">
                                     <div class="card animated bounceInLeft" style="width: 18rem; box-shadow: #f0f0f0 4px 4px; border-top: 15px solid #ff8000;">
                                         <div class="card-body">
                                             <h4 class="card-title">@instrument.name</h4>
