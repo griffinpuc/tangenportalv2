@@ -113,7 +113,7 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
 
-                @Html.Raw((Model.pagenum == 0) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Previous</button>" : "<button onclick=\"RunLoad(" + (Model.pagenum - 1).ToString() + ");\" class=\"btn btn-link\">Previous</button>")
+                @Html.Raw((Model.pagenum == 0) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled><i class=\"fas fa-arrow-circle-left\"></i></button>" : "<button onclick=\"RunLoad(" + (Model.pagenum - 1).ToString() + ");\" class=\"btn btn-link\"><i class=\"fas fa-arrow-circle-left\"></i></button>")
 
 
                 @for (int pnum = 0; pnum < Model.pagetotal; pnum++)
@@ -130,7 +130,7 @@
 
                 }
 
-                @Html.Raw((Model.pagenum+1 == Model.pagetotal) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Next</button>" : "<button onclick=\"RunLoad(" + (Model.pagenum + 1).ToString() + ");\" class=\"btn btn-link\">Next</button>")
+                @Html.Raw((Model.pagenum+1 == Model.pagetotal) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled><i class=\"fas fa-arrow-circle-right\"></i></button>" : "<button onclick=\"RunLoad(" + (Model.pagenum + 1).ToString() + ");\" class=\"btn btn-link\"><i class=\"fas fa-arrow-circle-right\"></i></button>")
             </ul>
 
         </nav>

@@ -31,3 +31,5 @@ C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-datapo
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\DevTools.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\RunMain.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\ViewRun.cshtml.g.cs
+C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\_Layout.cshtml.g.cs
+C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Debug\netcoreapp2.1\Razor\Views\Home\test.cshtml.g.cs
