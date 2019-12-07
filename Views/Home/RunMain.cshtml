@@ -3,111 +3,138 @@
 
 <script src="~/js/pace.js"></script>
 
-<div class="container-fluid">
+<script>
 
-    <div class="row">
-        <div class="col-sm-2">
-
-        </div>
-    </div>
-
-
-    @foreach (RunMod run in Model.runs)
-    {
-        <div class="card animated bounceInLeft" style="border-left-color: cornflowerblue; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
-            <div class="card-body">
-
-                <div class="row">
-
-                    <div class="col">
-                        <div class="row">
-                            <div class="col" style="font-weight: bolder; ">
-                                #@run.assayId
-                            </div>
-                            <div class="col">
-                                <div class="row" style="color: cornflowerblue; font-weight: bold;">
-                                    @run.dateTime.Split("T")[0]
-                                </div>
-                                <div class="row" style="color: cornflowerblue;">
-                                    @run.dateTime.Split("T")[1].Replace("Z", "")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="row" style="text-align: right;">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                @using (Html.BeginForm("ViewRun", "Home", FormMethod.Post, new { target = "_blank" }))
-                                {
-                                    <input hidden value="@run.Id" id="runid" name="runid" />
-                                    <button class="btn btn-sm btn-primary" style="margin-right: 10px;">View  <i class="far fa-chart-bar"></i></button>
-                                }
-                                @using (Html.BeginForm("DownloadRun", "Home", FormMethod.Post))
-                                {
-                                    <button class="btn btn-sm btn-secondary">Download Archive  <i class="fas fa-download"></i></button>
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    }
-
-    @for (int missrun = 1; missrun <= 10 - Model.runs.Length; missrun++)
-    {
-        <div class="card animated bounceInLeft" style="border-left-color: lightgray; background-color:whitesmoke; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
-            <div class="card-body">
-
-                <div class="row">
-
-                    <div class="col">
-                        <div class="row">
-                            <div class="col" style="font-weight: bolder; ">
-                            </div>
-                            <div class="col">
-                                <div class="row" style="color: lightgray; font-weight: bold;">
-                                </div>
-                                <div class="row" style="color: lightgray;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    }
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-
-            @Html.Raw((Model.pagenum == 0) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Previous</button>" : "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\">Previous</button>")
-
-
-
-            @for (int pnum = 0; pnum < Model.pagetotal; pnum++)
-            {
-                int displaynum = pnum + 1;
-                if (pnum == Model.pagenum)
-                {
-                    <button class="btn btn-link" disabled>@displaynum</button>
-                }
-                else
-                {
-                    <button onclick="RunLoad(@pnum);" class="btn btn-link">@displaynum</button>
-                }
-
+    function MainLoad() {
+        $.ajax({
+            url: '@Url.Action("runMain", "Home")',
+            success: function (data) {
+                $('#mainview').html(data);
             }
-            <button onclick="RunLoad(@Model.pagenum+1);" class="btn btn-link">Next</button>
-        </ul>
-    </nav>
+        });
+    }
+
+    function RunLoad(pagenum) {
+        $.ajax({
+            url: '@Url.Action("runMain", "Home")',
+            data: { pagenum },
+            success: function (data) {
+                $('#mainview').html(data);
+            }
+        });
+    }
+
+</script>
+
+<div id="mainview">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-2">
+
+            </div>
+        </div>
+
+
+        @foreach (RunMod run in Model.runs)
+        {
+            <div class="card animated bounceInLeft" style="border-left-color: cornflowerblue; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="row">
+                                <div class="col" style="font-weight: bolder; ">
+                                    #@run.assayId
+                                </div>
+                                <div class="col">
+                                    <div class="row" style="color: cornflowerblue; font-weight: bold;">
+                                        @run.dateTime.Split("T")[0]
+                                    </div>
+                                    <div class="row" style="color: cornflowerblue;">
+                                        @run.dateTime.Split("T")[1].Replace("Z", "")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="row" style="text-align: right;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    @using (Html.BeginForm("ViewRun", "Home", FormMethod.Post, new { target = "_blank" }))
+                                    {
+                                        <input hidden value="@run.Id" id="runid" name="runid" />
+                                        <button class="btn btn-sm btn-primary" style="margin-right: 10px;">View  <i class="far fa-chart-bar"></i></button>
+                                    }
+                                    @using (Html.BeginForm("DownloadRun", "Home", FormMethod.Post))
+                                    {
+                                        <button class="btn btn-sm btn-secondary">Download Archive  <i class="fas fa-download"></i></button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+
+        @for (int missrun = 1; missrun <= 10 - Model.runs.Length; missrun++)
+        {
+            <div class="card animated bounceInLeft" style="border-left-color: lightgray; background-color:whitesmoke; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="row">
+                                <div class="col" style="font-weight: bolder; ">
+                                </div>
+                                <div class="col">
+                                    <div class="row" style="color: lightgray; font-weight: bold;">
+                                    </div>
+                                    <div class="row" style="color: lightgray;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+                @Html.Raw((Model.pagenum == 0) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Previous</button>" : "<button onclick=\"RunLoad(" + (Model.pagenum - 1).ToString() + ");\" class=\"btn btn-link\">Previous</button>")
+
+
+                @for (int pnum = 0; pnum < Model.pagetotal; pnum++)
+                {
+                    int displaynum = pnum + 1;
+                    if (pnum == Model.pagenum)
+                    {
+                        <button class="btn btn-link" disabled>@displaynum</button>
+                    }
+                    else
+                    {
+                        <button onclick="RunLoad(@pnum);" class="btn btn-link">@displaynum</button>
+                    }
+
+                }
+                @Html.Raw((Model.pagenum+1 == Model.pagetotal) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Next</button>" : "<button onclick=\"RunLoad(" + (Model.pagenum + 1).ToString() + ");\" class=\"btn btn-link\">Next</button>")
+            </ul>
+        </nav>
+    </div>
 </div>
+
+
+
 

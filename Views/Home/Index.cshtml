@@ -40,15 +40,6 @@
             });
         }
 
-        function AdminLoad() {
-            $.ajax({
-                url: '@Url.Action("devtools", "Home")',
-                success: function (data) {
-                    $('#mainview').html(data);
-                }
-            });
-        }
-
         function RunLoad(pagenum) {
             $.ajax({
                 url: '@Url.Action("runMain", "Home")',
@@ -58,25 +49,6 @@
                 }
             });
         }
-
-        function InstrumentLoad() {
-            $.ajax({
-                url: '@Url.Action("Instruments", "Home")',
-                success: function (data) {
-                    $('#mainview').html(data);
-                }
-            });
-        }
-
-        function MetricLoad() {
-            $.ajax({
-                url: '@Url.Action("Metrics", "Home")',
-                success: function (data) {
-                    $('#mainview').html(data);
-                }
-            });
-        }
-
 
     </script>
 
@@ -91,7 +63,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Index">
                 <div class="sidebar-brand-text mx-3">Tangen Portal <sup>2</sup></div>
             </a>
 
@@ -100,22 +72,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <button class="nav-link btn btn-link" onclick="MainLoad();">
-                    <i class="fas fa-home"></i>
-                    Dashboard
-                </button>
-                <button class="nav-link btn btn-link" onclick="InstrumentLoad();">
-                    <i class="fas fa-robot"></i>
-                    Instruments
-                </button>
-                <button class="nav-link btn btn-link" onclick="MetricLoad();">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    Metrics
-                </button>
-                <button class="nav-link btn btn-link" onclick="AdminLoad();">
-                    <i class="fas fa-tools"></i>
-                    Admin Settings
-                </button>
+                <a class="nav-link" href="/Home/Index"><i class="fas fa-home"></i>Dashboard</a>
+                <a class="nav-link" href="/Home/Instruments"><i class="fas fa-robot"></i>Instruments</a>
+                <a class="nav-link" href="/Home/DevTools"><i class="fas fa-tools"></i>Admin Settings</a>
             </li>
 
             <!-- Divider -->
