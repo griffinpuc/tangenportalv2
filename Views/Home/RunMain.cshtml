@@ -129,8 +129,10 @@
                     }
 
                 }
+
                 @Html.Raw((Model.pagenum+1 == Model.pagetotal) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Next</button>" : "<button onclick=\"RunLoad(" + (Model.pagenum + 1).ToString() + ");\" class=\"btn btn-link\">Next</button>")
             </ul>
+
         </nav>
     </div>
 </div>

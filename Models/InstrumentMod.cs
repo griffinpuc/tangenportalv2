@@ -13,6 +13,7 @@ namespace tangenportalv2.Models
         public string localAddress { get; set; }
         public string status { get; set; }
         public string lastPing { get; set; }
+        public DateTime dateAdded { get; set; }
 
     }
 }
