@@ -136,28 +136,8 @@
                         <div class="col" style="position: relative;">
                             @foreach (InstrumentMod instrument in Model.instruments)
                             {
-                                @*<div class="row" style="margin-bottom: 20px;">
-                <div class="card animated bounceInLeft" style="width: 50vw;box-shadow: #f0f0f0 4px 4px; border-top: 15px solid #ff8000;">
-                    <div class="card-body">
-                        <h4 class="card-title">@instrument.name</h4>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        @Html.Raw((instrument.status.Equals("Offline")) ? "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #ff3333\">Offline</span></li>" : "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #228B22\">Online</span></li>")
-                        <li class="list-group-item"><strong>Address: </strong><br />@instrument.localAddress</li>
-                        <li class="list-group-item"><strong>Date added: </strong><br />@instrument.dateAdded</li>
-                    </ul>
-                    <div class="card-body">
-                        @using (Html.BeginForm("removeInstrument", "Home", FormMethod.Post))
-                        {
-                            <input type="hidden" value="@instrument" name="instrument" />
-                            <button class="btn btn-link" type="submit">Remove instrument</button>
-
-                        }
-                    </div>
-                </div>
-            </div>*@
                                 <div class="row">
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-7">
                                         <div class="card animated bounceInLeft" style="border-left-color: orange; border-left-width: 7px; width: auto; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
                                             <div class="card-body">
 
@@ -182,7 +162,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-1">
-                                        <div class="card animated bounceInLeft" style="border-left-color: lightcoral; border-left-width: 7px; width: auto; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                                        <div class="card animated bounceInLeft" style="display: inline-block; border-left-color: lightcoral; border-left-width: 7px; width: auto; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
                                             <div class="card-body">
 
                                                 <div class="row">
@@ -202,7 +182,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
 
                             }
                         </div>
