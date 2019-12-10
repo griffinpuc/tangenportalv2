@@ -55,7 +55,7 @@ namespace tangenportalv2.Controllers
         {
             _context.getBatch(batchid).runBatch(_context);
 
-            return RedirectToAction("runMain", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult runMain(int? pagenum)

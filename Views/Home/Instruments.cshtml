@@ -101,18 +101,18 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <!-- Partial page begin-->
-                <div id="mainview">
+                <div id="mainview" style="z-index: 1;">
 
                     <div class="container-fluid">
 
                         <div class="row animated bounceInLeft" style="margin-bottom: 50px;">
                             <div class="col">
-                                <div class="card" style="border: 3.5px solid #f0f0f0;">
+                                <div class="card" style="border: 3.5px solid #f0f0f0; width: 900px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-2">
-                                                <h3>Add Instrument</h3>
-                                            </div>
+                                            <h3 style="margin-left: 15px;">Add Instrument</h3>
+                                        </div>
+                                        <div class="row">
                                             @using (Html.BeginForm("addInstrument", "Home", FormMethod.Post))
                                             {
                                                 <div class="form-inline">
@@ -133,29 +133,29 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="position: fixed;">
                             @foreach (InstrumentMod instrument in Model.instruments)
                             {
-                                <div class="col-sm-2">
-                                    <div class="card animated bounceInLeft" style="width: 18rem; box-shadow: #f0f0f0 4px 4px; border-top: 15px solid #ff8000;">
-                                        <div class="card-body">
-                                            <h4 class="card-title">@instrument.name</h4>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            @Html.Raw((instrument.status.Equals("Offline")) ? "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #ff3333\">Offline</span></li>" : "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #00cc00\">Online</span></li>")
-                                            <li class="list-group-item"><strong>Address: </strong>@instrument.localAddress</li>
-                                            <li class="list-group-item"><strong>Date added: </strong>@instrument.dateAdded</li>
-                                        </ul>
-                                        <div class="card-body">
-                                            @using (Html.BeginForm("removeInstrument", "Home", FormMethod.Post))
-                                            {
-                                                <input type="hidden" value="@instrument" name="instrument" />
-                                                <button class="btn btn-link" type="submit">Remove instrument</button>
+                            <div class="col-sm-3" style="margin-right: 50px;">
+                                <div class="card animated bounceInLeft" style="width: 18rem; box-shadow: #f0f0f0 4px 4px; border-top: 15px solid #ff8000;">
+                                    <div class="card-body">
+                                        <h4 class="card-title">@instrument.name</h4>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        @Html.Raw((instrument.status.Equals("Offline")) ? "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #ff3333\">Offline</span></li>" : "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #228B22\">Online</span></li>")
+                                        <li class="list-group-item"><strong>Address: </strong>@instrument.localAddress</li>
+                                        <li class="list-group-item"><strong>Date added: </strong>@instrument.dateAdded</li>
+                                    </ul>
+                                    <div class="card-body">
+                                        @using (Html.BeginForm("removeInstrument", "Home", FormMethod.Post))
+                                        {
+                                            <input type="hidden" value="@instrument" name="instrument" />
+                                            <button class="btn btn-link" type="submit">Remove instrument</button>
 
-                                            }
-                                            </div>
+                                        }
                                     </div>
                                 </div>
+                            </div>
                             }
                         </div>
                     </div>

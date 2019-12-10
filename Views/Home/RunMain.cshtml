@@ -24,6 +24,40 @@
         });
     }
 
+    loadPageination( parseInt((Math.floor(@Model.pagenum / 10) * 10).toString()[0], 10) );
+
+    function loadPageination(offset) {
+
+        var pagetotal = @Model.pagetotal;
+
+        if ((offset * 10) < Math.ceil(pagetotal)) {
+
+            if (offset == 0) { document.getElementById("backbutton").disabled = true; }
+            else { document.getElementById("backbutton").disabled = false; }
+
+            var div = document.getElementById('pagelist');
+
+            $("#backbutton").attr("onclick", "loadPageination(" + (offset - 1) + ");");
+            $("#forwardbutton").attr("onclick", "loadPageination(" + (offset + 1) + ");");
+
+            var innerlisthtml = "";
+
+            for (i = (offset * 10); i < pagetotal; i++) {
+
+                if (i < ((offset + 1) * 10)) {
+                    if (i == (pagetotal - 1)) { document.getElementById("forwardbutton").disabled = true; }
+                    else { document.getElementById("forwardbutton").disabled = false; }
+
+                    if (i == @Model.pagenum) { innerlisthtml += ("<button class=\"btn btn-link\" disabled>" + (i + 1) + "</button>"); }
+                    else { innerlisthtml += ("<button class=\"btn btn-link\" onclick=\"RunLoad(" + i + ")\">" + (i + 1) + "</button>"); }
+
+                }
+            }
+
+            div.innerHTML = (innerlisthtml);
+        }
+    }
+
 </script>
 
 <div id="mainview">
@@ -113,24 +147,13 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
 
-                @Html.Raw((Model.pagenum == 0) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Previous</button>" : "<button onclick=\"RunLoad(" + (Model.pagenum - 1).ToString() + ");\" class=\"btn btn-link\">Previous</button>")
+                <button onclick="" class="btn btn-link" id="backbutton"><i class="fas fa-arrow-circle-left"></i></button>
 
+                <div id="pagelist">
+                </div>
 
-                @for (int pnum = 0; pnum < Model.pagetotal; pnum++)
-                {
-                    int displaynum = pnum + 1;
-                    if (pnum == Model.pagenum)
-                    {
-                        <button class="btn btn-link" disabled>@displaynum</button>
-                    }
-                    else
-                    {
-                        <button onclick="RunLoad(@pnum);" class="btn btn-link">@displaynum</button>
-                    }
+                <button onclick="loadPageination(1);" class="btn btn-link" id="forwardbutton"><i class="fas fa-arrow-circle-right"></i></button>
 
-                }
-
-                @Html.Raw((Model.pagenum+1 == Model.pagetotal) ? "<button onclick=\"RunLoad(@Model.pagenum-1);\" class=\"btn btn-link\" disabled>Next</button>" : "<button onclick=\"RunLoad(" + (Model.pagenum + 1).ToString() + ");\" class=\"btn btn-link\">Next</button>")
             </ul>
 
         </nav>
