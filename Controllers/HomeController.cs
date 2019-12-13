@@ -69,10 +69,10 @@ namespace tangenportalv2.Controllers
             return RedirectToAction("Instruments", "Home");
         }
 
-        public IActionResult removeInstrument(InstrumentMod instrument)
+        public IActionResult removeInstrument(int id)
         {
-            _context.RemoveEntry(instrument);
-            return RedirectToAction("Instrumnets", "Home");
+            _context.removeInstrument(id);
+            return RedirectToAction("Instruments", "Home");
         }
 
         public IActionResult Index()

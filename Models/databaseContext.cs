@@ -87,6 +87,12 @@ namespace tangenportalv2.Models
         {
             return (from InstrumentMod in InstrumentTable select InstrumentMod).ToArray();
         }
+        
+        public void removeInstrument(int id)
+        {
+            Remove((from InstrumentMod in InstrumentTable where InstrumentMod.ID == id select InstrumentMod).First());
+            SaveChanges();
+        }
 
         public void removeRuns()
         {

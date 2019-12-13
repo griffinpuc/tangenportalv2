@@ -172,9 +172,13 @@
                                                             <button class="btn btn-light">
                                                                 <i class="far fa-edit"></i>
                                                             </button>
-                                                            <button class="btn btn-light">
-                                                                <i class="far fa-trash-alt" style="color: red;"></i>
-                                                            </button>
+                                                            @using (Html.BeginForm("removeInstrument", "Home", FormMethod.Post))
+                                                            {
+                                                                <input value="@instrument.ID" name="id" hidden />
+                                                                <button class="btn btn-light" type="submit">
+                                                                    <i class="far fa-trash-alt" style="color: red;"></i>
+                                                                </button>
+                                                            }
                                                         </div>
                                                     </div>
 
