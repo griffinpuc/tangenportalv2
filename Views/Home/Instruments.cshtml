@@ -133,29 +133,57 @@
                             </div>
                         </div>
 
-                        <div class="row" style="position: fixed;">
+                        <div class="col" style="position: relative;">
                             @foreach (InstrumentMod instrument in Model.instruments)
                             {
-                            <div class="col-sm-3" style="margin-right: 50px;">
-                                <div class="card animated bounceInLeft" style="width: 18rem; box-shadow: #f0f0f0 4px 4px; border-top: 15px solid #ff8000;">
-                                    <div class="card-body">
-                                        <h4 class="card-title">@instrument.name</h4>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        @Html.Raw((instrument.status.Equals("Offline")) ? "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #ff3333\">Offline</span></li>" : "<li class=\"list-group-item\"><strong>Status: </strong><span style=\"color: #228B22\">Online</span></li>")
-                                        <li class="list-group-item"><strong>Address: </strong>@instrument.localAddress</li>
-                                        <li class="list-group-item"><strong>Date added: </strong>@instrument.dateAdded</li>
-                                    </ul>
-                                    <div class="card-body">
-                                        @using (Html.BeginForm("removeInstrument", "Home", FormMethod.Post))
-                                        {
-                                            <input type="hidden" value="@instrument" name="instrument" />
-                                            <button class="btn btn-link" type="submit">Remove instrument</button>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="card animated bounceInLeft" style="border-left-color: orange; border-left-width: 7px; width: auto; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                                            <div class="card-body">
 
-                                        }
+                                                <div class="row">
+
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col-sm-5" style="font-weight: bolder; font-size: 15pt;">
+                                                                #@instrument.name
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                @Html.Raw((instrument.status.Equals("Offline")) ? "<p><strong>Status: </strong><span style=\"color: #ff590d;\">Offline</span></p>" : "<p><strong>Status: </strong><span style=\"color: #228B22\">Online</span></p>")
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                @instrument.localAddress
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <div class="card animated bounceInLeft" style="display: inline-block; border-left-color: lightcoral; border-left-width: 7px; width: auto; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                                            <div class="card-body">
+
+                                                <div class="row">
+
+                                                    <div class="col-sm-1">
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-light">
+                                                                <i class="far fa-edit"></i>
+                                                            </button>
+                                                            <button class="btn btn-light">
+                                                                <i class="far fa-trash-alt" style="color: red;"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
                             }
                         </div>
                     </div>
