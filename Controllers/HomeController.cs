@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using tangenportalv2.Models;
 
@@ -8,10 +9,12 @@ namespace tangenportalv2.Controllers
     {
 
         public databaseContext _context;
+        private readonly IHubContext<DataHub> _hubContext;
 
-        public HomeController(databaseContext context)
+        public HomeController(databaseContext context, IHubContext<DataHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         public IActionResult devtools()
@@ -65,7 +68,7 @@ namespace tangenportalv2.Controllers
 
         public IActionResult addInstrument(string nickname, string address)
         {
-            _context.AddEntry(new InstrumentMod { name=nickname, localAddress=address, dateAdded=System.DateTime.Now, status="Offline" });
+            _context.AddEntry(new InstrumentMod { name = nickname, localAddress = address, dateAdded = System.DateTime.Now, status = "OFFLINE", isActive = true }); ;
             return RedirectToAction("Instruments", "Home");
         }
 
@@ -80,10 +83,24 @@ namespace tangenportalv2.Controllers
             return View();
         }
 
-        public IActionResult ViewRun(int runid)
+        public IActionResult ViewData(int runid)
         {
             RunMod run = _context.getRun(runid);
-            return View( new Nugget() { run= run });
+            return View( new Nugget() { run = run });
+        }
+
+
+        public IActionResult ViewJson(int runid)
+        {
+            RunMod run = _context.getRun(runid);
+            return View(new Nugget() { run = run });
+        }
+
+
+        public IActionResult ViewRaw8879(int runid)
+        {
+            RunMod run = _context.getRun(runid);
+            return View(new Nugget() { run = run });
         }
 
         public IActionResult Admin()

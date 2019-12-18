@@ -18,21 +18,6 @@ namespace tangenportalv2.Models
         {
         }
 
-        public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<databaseContext>
-        {
-            public databaseContext CreateDbContext(string[] args)
-            {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-                var builder = new DbContextOptionsBuilder<databaseContext>();
-                var connectionString = configuration.GetConnectionString("dbConnection");
-                builder.UseSqlServer(connectionString);
-                return new databaseContext(builder.Options);
-            }
-        }
-
         public DbSet<RunMod> RunTable { get; set; }
         public DbSet<InstrumentMod> InstrumentTable { get; set; }
         public DbSet<BatchModel> BatchTable { get; set; }
