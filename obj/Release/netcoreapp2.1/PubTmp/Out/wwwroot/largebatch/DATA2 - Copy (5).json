@@ -1,0 +1,232 @@
+{
+  "uniqueId": "20191126_172817_CPDEV2KRKKK",
+  "dateTime": "2019-11-26T17:28:17Z",
+  "sampleId": "CPDEV2KRKKK",
+  "assayName": "Candida Neg Ctl",
+  "assayId": "1102",
+  "kitLotId": "99999999",
+  "instrumentUuid": "16AC00064",
+  "instrumentName": "CPDEV2",
+  "results": [
+    {
+      "name": "Neg Ext Control",
+      "outcomeCode": "1",
+      "outcomeString": "Invalid"
+    }
+  ],
+  "targets": [
+    {
+      "name": "Control",
+      "targetId": "1",
+      "outcomeCode": "5",
+      "outcomeString": "Fail"
+    },
+    {
+      "name": "C albicans",
+      "targetId": "2",
+      "outcomeCode": "1",
+      "outcomeString": "Invalid"
+    },
+    {
+      "name": "C glabrata",
+      "targetId": "3",
+      "outcomeCode": "1",
+      "outcomeString": "Invalid"
+    },
+    {
+      "name": "C krusei",
+      "targetId": "4",
+      "outcomeCode": "1",
+      "outcomeString": "Invalid"
+    },
+    {
+      "name": "C parapsilosis",
+      "targetId": "5",
+      "outcomeCode": "1",
+      "outcomeString": "Invalid"
+    },
+    {
+      "name": "C tropicalis",
+      "targetId": "6",
+      "outcomeCode": "1",
+      "outcomeString": "Invalid"
+    }
+  ],
+  "wells": [
+    {
+      "wellId": "1",
+      "species": "Control",
+      "cq": "0"
+    },
+    {
+      "wellId": "2",
+      "species": "C albicans",
+      "cq": "0"
+    },
+    {
+      "wellId": "3",
+      "species": "C albicans",
+      "cq": "0"
+    },
+    {
+      "wellId": "4",
+      "species": "C albicans",
+      "cq": "0"
+    },
+    {
+      "wellId": "5",
+      "species": "C albicans",
+      "cq": "0"
+    },
+    {
+      "wellId": "6",
+      "species": "C albicans",
+      "cq": "0"
+    },
+    {
+      "wellId": "7",
+      "species": "C albicans",
+      "cq": "0"
+    },
+    {
+      "wellId": "8",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "9",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "10",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "11",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "12",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "13",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "14",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "15",
+      "species": "C glabrata",
+      "cq": "0"
+    },
+    {
+      "wellId": "16",
+      "species": "Control",
+      "cq": "0"
+    },
+    {
+      "wellId": "17",
+      "species": "C krusei",
+      "cq": "0"
+    },
+    {
+      "wellId": "18",
+      "species": "C krusei",
+      "cq": "0"
+    },
+    {
+      "wellId": "19",
+      "species": "C krusei",
+      "cq": "0"
+    },
+    {
+      "wellId": "20",
+      "species": "C krusei",
+      "cq": "0"
+    },
+    {
+      "wellId": "21",
+      "species": "C krusei",
+      "cq": "0"
+    },
+    {
+      "wellId": "22",
+      "species": "C krusei",
+      "cq": "0"
+    },
+    {
+      "wellId": "23",
+      "species": "Control",
+      "cq": "0"
+    },
+    {
+      "wellId": "24",
+      "species": "C parapsilosis",
+      "cq": "0"
+    },
+    {
+      "wellId": "25",
+      "species": "C parapsilosis",
+      "cq": "0"
+    },
+    {
+      "wellId": "26",
+      "species": "C parapsilosis",
+      "cq": "0"
+    },
+    {
+      "wellId": "27",
+      "species": "C parapsilosis",
+      "cq": "0"
+    },
+    {
+      "wellId": "28",
+      "species": "C parapsilosis",
+      "cq": "0"
+    },
+    {
+      "wellId": "29",
+      "species": "C parapsilosis",
+      "cq": "0"
+    },
+    {
+      "wellId": "30",
+      "species": "C parapsilosis",
+      "cq": "0"
+    },
+    {
+      "wellId": "31",
+      "species": "C tropicalis",
+      "cq": "0"
+    },
+    {
+      "wellId": "32",
+      "species": "C tropicalis",
+      "cq": "0"
+    },
+    {
+      "wellId": "33",
+      "species": "C tropicalis",
+      "cq": "0"
+    },
+    {
+      "wellId": "34",
+      "species": "C tropicalis",
+      "cq": "0"
+    },
+    {
+      "wellId": "35",
+      "species": "C tropicalis",
+      "cq": "0"
+    }
+  ]
+}

@@ -2785,6 +2785,18 @@
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
         }
       },
+      "PusherServer/4.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netStandard1.6/PusherServer.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netStandard1.6/PusherServer.Core.dll": {}
+        }
+      },
       "Remotion.Linq/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -7711,6 +7723,22 @@
         "nuget.frameworks.nuspec"
       ]
     },
+    "PusherServer/4.2.0": {
+      "sha512": "IAi5o3WzSDjPp2bDp1lQn16VOsVL6DptbvWpDc3VA6TtXEYoOINn8+2M44ctfGMWnHJ9KHyyPly3DT3QeIH8LQ==",
+      "type": "package",
+      "path": "pusherserver/4.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README.md",
+        "lib/net45/PusherServer.XML",
+        "lib/net45/PusherServer.dll",
+        "lib/netStandard1.6/PusherServer.Core.dll",
+        "pusherserver.4.2.0.nupkg.sha512",
+        "pusherserver.nuspec"
+      ]
+    },
     "Remotion.Linq/2.2.0": {
       "sha512": "fK/76UmpC0FXBlGDFVPLJHQlDLYnGC+XY3eoDgCgbtrhi0vzbXDQ3n/IYHhqSKqXQfGw/u04A1drWs7rFVkRjw==",
       "type": "package",
@@ -12529,7 +12557,8 @@
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.10",
-      "Newtonsoft.Json >= 12.0.2"
+      "Newtonsoft.Json >= 12.0.2",
+      "PusherServer >= 4.2.0"
     ]
   },
   "packageFolders": {
@@ -12600,6 +12629,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.2, )"
+          },
+          "PusherServer": {
+            "target": "Package",
+            "version": "[4.2.0, )"
           }
         },
         "imports": [

@@ -77,10 +77,10 @@
 
                     <div class="row">
 
-                        <div class="col-sm-5">
+                        <div class="col-sm-7">
                             <div class="row">
                                 <div class="col" style="font-weight: bolder; color: cornflowerblue">
-                                    #@run.assayId
+                                    #@run.uniqueId
                                 </div>
                             </div>
                             <div class="row">
@@ -93,7 +93,7 @@
                         <div class="col-sm-5">
                             <div class="row" style="text-align: right;">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    @using (Html.BeginForm("ViewRun", "Home", FormMethod.Post, new { target = "_blank" }))
+                                    @using (Html.BeginForm("ViewJson", "Home", FormMethod.Post, new { target = "_blank" }))
                                     {
                                         <input hidden value="@run.Id" id="runid" name="runid" />
                                         <button class="btn btn-sm btn-primary" style="margin-right: 10px;">View  <i class="far fa-chart-bar"></i></button>
@@ -115,7 +115,7 @@
 
         @for (int missrun = 1; missrun <= 10 - Model.runs.Length; missrun++)
         {
-            <div class="card animated bounceInLeft" style="border-left-color: lightgray; background-color:whitesmoke; border-left-width: 7px; width: 18rem; width: 60vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
+            <div class="card animated bounceInLeft" style="display:block; border-left-color: lightgray; background-color:whitesmoke; border-left-width: 7px;  width: 40vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
                 <div class="card-body">
 
                     <div class="row">

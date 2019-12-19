@@ -16,11 +16,12 @@
 
     <!-- Custom fonts for this template-->
     <script src="https://kit.fontawesome.com/2f4791119e.js" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="~/css/sb-admin-2.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <script src="~/js/sb-admin-2.js"></script>
     <link href="~/css/animate.css" rel="stylesheet" />
+    <script src="~/js/signalr/signalr.js"></script>
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -30,11 +31,31 @@
             crossorigin="anonymous">
     </script>
 
+    <script>
+
+        try {
+            var connection = new signalR.HubConnectionBuilder().withUrl("/dataHub").build();
+        }
+        catch (error) {
+            console.error(error);
+        }
+
+        connection.on("push", function (status, instrument_ID, colorcode) {
+            document.getElementById("ins_status_" + instrument_ID).innerHTML = ("<strong style=\"color:" + colorcode + ";\">" + status + "</strong>");
+        });
+
+        connection.start().then(function () {
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+    </script>
+
     <link href="~/css/load-min.css" rel="stylesheet" />
 
 </head>
 
-<body id="page-top" onload="MainLoad();">
+<body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -54,7 +75,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="/Home/Index"><i class="fas fa-home"></i>Dashboard</a>
                 <a class="nav-link" href="/Home/Instruments"><i class="fas fa-robot"></i>Instruments</a>
-                <a class="nav-link" href="/Home/DevTools"><i class="fas fa-tools"></i>Admin Settings</a>
+                <a class="nav-link" href="/Home/UpdateAgent"><i class="fas fa-terminal"></i></i>Update Agent</a>
+                <a style="bottom: 0%; position: fixed;" class="nav-link" href="/Home/DevTools"><i class="fas fa-tools"></i>Admin Settings</a>
             </li>
 
             <!-- Divider -->
@@ -69,39 +91,10 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
-
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-
-
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <!-- Partial page begin-->
-                <div id="mainview" style="z-index: 1;">
+                <div id="mainview" style="margin-top: 50px;">
 
                     <div class="container-fluid">
 
@@ -149,7 +142,13 @@
                                                                 #@instrument.name
                                                             </div>
                                                             <div class="col-sm-3">
-                                                                @Html.Raw((instrument.status.Equals("Offline")) ? "<p><strong>Status: </strong><span style=\"color: #ff590d;\">Offline</span></p>" : "<p><strong>Status: </strong><span style=\"color: #228B22\">Online</span></p>")
+
+                                                                <div id="ins_status_@instrument.ID">
+                                                                    <strong style="color: lightslategrey;">
+                                                                        LOADING...
+                                                                    </strong>
+                                                                </div>
+                                                                
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 @instrument.localAddress
@@ -172,9 +171,13 @@
                                                             <button class="btn btn-light">
                                                                 <i class="far fa-edit"></i>
                                                             </button>
-                                                            <button class="btn btn-light">
-                                                                <i class="far fa-trash-alt" style="color: red;"></i>
-                                                            </button>
+                                                            @using (Html.BeginForm("removeInstrument", "Home", FormMethod.Post))
+                                                            {
+                                                                <input value="@instrument.ID" name="id" hidden />
+                                                                <button class="btn btn-light" type="submit">
+                                                                    <i class="far fa-trash-alt" style="color: red;"></i>
+                                                                </button>
+                                                            }
                                                         </div>
                                                     </div>
 
