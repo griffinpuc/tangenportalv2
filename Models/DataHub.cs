@@ -8,10 +8,9 @@ namespace tangenportalv2.Models
 {
     public class DataHub : Hub
     {
-
-        public async Task shakehands()
+        public async Task updateStatus(string status, int instrument_ID, string colorcode)
         {
-            await Clients.All.SendAsync("validateconnection", "Message from the other side");
+            await Clients.All.SendAsync("push", status, instrument_ID, colorcode);
         }
 
     }

@@ -97,13 +97,18 @@ namespace tangenportalv2.Controllers
         }
 
 
-        public IActionResult ViewRaw8879(int runid)
+        public IActionResult ViewRaw(int runid)
         {
             RunMod run = _context.getRun(runid);
             return View(new Nugget() { run = run });
         }
 
         public IActionResult Admin()
+        {
+            return View();
+        }
+
+        public IActionResult UpdateAgent()
         {
             return View();
         }
