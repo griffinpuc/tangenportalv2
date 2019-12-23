@@ -5,25 +5,6 @@
 
 <script>
 
-    function MainLoad() {
-        $.ajax({
-            url: '@Url.Action("runMain", "Home")',
-            success: function (data) {
-                $('#mainview').html(data);
-            }
-        });
-    }
-
-    function RunLoad(pagenum) {
-        $.ajax({
-            url: '@Url.Action("runMain", "Home")',
-            data: { pagenum },
-            success: function (data) {
-                $('#mainview').html(data);
-            }
-        });
-    }
-
     loadPageination( parseInt((Math.floor(@Model.pagenum / 10) * 10).toString()[0], 10) );
 
     function loadPageination(offset) {
@@ -85,7 +66,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    @run.dateTime
+                                    @Convert.ToDateTime(run.dateTime)
                                 </div>
                             </div>
                         </div>

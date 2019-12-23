@@ -5,6 +5,11 @@
     <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <NullableContextOptions>enable</NullableContextOptions>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Views\Home\dev\**" />
     <Compile Remove="Views\RunView\**" />

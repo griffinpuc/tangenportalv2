@@ -15,6 +15,8 @@ namespace tangenportalv2.Models
         public string jsonrun { get; set; }
         public int pagenum { get; set; }
         public double pagetotal { get; set; }
+        public int totalRuns { get; set; }
+        public string[] instrumentNames { get; set; }
 
     }
 }
