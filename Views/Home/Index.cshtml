@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model tangenportalv2.Models.Nugget;
+@using tangenportalv2.Models;
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,27 +14,36 @@
 
     <title>TangenPortal</title>
 
-    <!-- Custom fonts for this template-->
     <script src="~/js/jquery.js"></script>
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/bootstrap/js/bootstrap.js"></script>
     <script src="https://kit.fontawesome.com/2f4791119e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="~/css/sb-admin-2.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="~/js/sb-admin-2.js"></script>
     <link href="~/css/animate.css" rel="stylesheet" />
-
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-
-
     <link href="~/css/load-min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
 
         function MainLoad() {
             $.ajax({
                 url: '@Url.Action("runMain", "Home")',
+                success: function (data) {
+                    $('#mainview').html(data);
+                }
+            });
+        }
+
+        function getFromInstrument(instrumentName) {
+            $('#instrumentFilter').html('Filter: ' + instrumentName);
+            $.ajax({
+                url: '@Url.Action("getFromInstrument", "Home")',
+                data: {instrumentName},
                 success: function (data) {
                     $('#mainview').html(data);
                 }
@@ -73,7 +85,6 @@
                 <a class="nav-link" href="/Home/Index"><i class="fas fa-home"></i>Dashboard</a>
                 <a class="nav-link" href="/Home/Instruments"><i class="fas fa-robot"></i>Instruments</a>
                 <a class="nav-link" href="/Home/UpdateAgent"><i class="fas fa-terminal"></i></i>Update Agent</a>
-                <a style="bottom: 0%; position: fixed;" class="nav-link" href="/Home/DevTools"><i class="fas fa-tools"></i>Admin Settings</a>
             </li>
 
             <!-- Divider -->
@@ -91,29 +102,53 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
 
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
+                    <div class="dropdown">
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="instrumentFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Instrument filter
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="instrumentFilter">
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                            {
+                                <button type="submit" class="dropdown-item" type="button">All instruments</button>
+                            }
+                            @foreach (string instrument in Model.instrumentNames)
+                            {
+                                <button id="filter-@instrument" onclick="getFromInstrument('@instrument');" class="dropdown-item" type="button">@instrument</button>
+                            }
                         </div>
-                    </form>
+                    </div>
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <button id="datepick" class="flatpickr flatpickr-input btn btn-dark" style="margin-left: 20px;">Date filter</button>
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                        <button style="margin-left: 20px;" class="btn btn-outline-primary">Reset</button>
+                    }
+
+                    <script>
+                        const fp1 = flatpickr("#datepick", {
+                            mode: "range",
+                            dateFormat: "d-m-Y"
+                        });
+                        fp1.config.onChange.push(
+                            function (selectedDates) {
+                                console.log(selectedDates);
+                                if (selectedDates.length > 1) {
+                                    var dates = String(selectedDates);
+                                    $.ajax({
+                                        url: '@Url.Action("getFromDateRange", "Home")',
+                                        data: { dates },
+                                        success: function (data) {
+                                            $('#mainview').html(data);
+                                            document.getElementById("datepick").innerHTML = (String(String(selectedDates[0]).split(" ").slice(1, 4)).replace(new RegExp(",", "g"), " ") + " to " + String(String(selectedDates[1]).split(" ").slice(1, 4)).replace(new RegExp(",", "g"), " "));
+                                        }
+                                    });
+                                }
+                            });
+                    </script>
+
+                    </nav>
+            </div>
 
 
 
@@ -124,11 +159,6 @@
 
 
                 </div>
-
-
-
-            </div>
-
 
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -146,13 +176,12 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
-
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    </div>
 
 
 </body>

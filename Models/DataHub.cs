@@ -13,5 +13,10 @@ namespace tangenportalv2.Models
             await Clients.All.SendAsync("push", status, instrument_ID, colorcode);
         }
 
+        public async Task streamLine(string line)
+        {
+            await Clients.All.SendAsync("stream", line);
+        }
+
     }
 }

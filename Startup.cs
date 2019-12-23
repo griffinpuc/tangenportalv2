@@ -39,6 +39,7 @@ namespace tangen_dataportal_version2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
             services.AddDbContext<databaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("devConnection")));
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +57,7 @@ namespace tangen_dataportal_version2
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

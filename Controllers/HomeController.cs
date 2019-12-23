@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using tangenportalv2.Models;
@@ -9,12 +10,10 @@ namespace tangenportalv2.Controllers
     {
 
         public databaseContext _context;
-        private readonly IHubContext<DataHub> _hubContext;
 
-        public HomeController(databaseContext context, IHubContext<DataHub> hubContext)
+        public HomeController(databaseContext context)
         {
             _context = context;
-            _hubContext = hubContext;
         }
 
         public IActionResult devtools()
@@ -24,14 +23,6 @@ namespace tangenportalv2.Controllers
             nug.batches = _context.getBatches();
 
             return View(nug);
-        }
-
-
-        public IActionResult removeAllRun()
-        {
-            _context.removeRuns();
-
-            return RedirectToAction("newui", "Home");
         }
 
         public IActionResult addBatch(string batchname, string batchurl)
@@ -45,6 +36,12 @@ namespace tangenportalv2.Controllers
 
             return RedirectToAction("devtools", "Home");
 
+        }
+
+        public JsonResult toggleInstrument(int instrumentID)
+        {
+            _context.toggleInstrument(instrumentID);
+            return Json("OK");
         }
 
         public IActionResult deleteBatch(BatchModel batch)
@@ -63,12 +60,55 @@ namespace tangenportalv2.Controllers
 
         public IActionResult runMain(int? pagenum)
         {
-            return View(new Nugget() { runs = _context.getRuns(pagenum ?? 0), pagetotal = Math.Ceiling(_context.countRuns()/10), pagenum = pagenum ?? 0 });
+            string instrumentFilter = HttpContext.Session.GetString("instrumentFilter");
+            string startDate = HttpContext.Session.GetString("startDate");
+            string endDate = HttpContext.Session.GetString("endDate");
+
+            Tuple<RunMod[], double> info = _context.getAll(instrumentFilter, startDate, endDate, pagenum ?? 0);
+
+            return View(new Nugget()
+            {
+                runs = info.Item1,
+                pagetotal = Math.Ceiling(info.Item2 / 10),
+                pagenum = pagenum ?? 0
+            });
+
+        }
+
+        public IActionResult getFromInstrument(string instrumentName)
+        {
+            string instrumentFilter = HttpContext.Session.GetString("instrumentFilter");
+            HttpContext.Session.SetString("instrumentFilter", instrumentName);
+
+            return RedirectToAction("runMain", "Home");
+        }
+
+        public IActionResult getFromDateRange(string dates)
+        {
+            var splitted = dates.Split(",");
+            var sD = splitted[0].Split(" ");
+            var eD = splitted[1].Split(" ");
+            string startDateFormatted = sD[0] + " " + sD[1] + " " + sD[2] + " " + sD[3] + " " + sD[4];
+            string endDateFormatted = eD[0] + " " + eD[1] + " " + eD[2] + " " + eD[3] + " " + eD[4];
+
+            HttpContext.Session.SetString("startDate", Convert.ToDateTime(startDateFormatted).ToString());
+            HttpContext.Session.SetString("endDate", Convert.ToDateTime(endDateFormatted).ToString());
+            
+            return RedirectToAction("runMain", "Home");
         }
 
         public IActionResult addInstrument(string nickname, string address)
         {
-            _context.AddEntry(new InstrumentMod { name = nickname, localAddress = address, dateAdded = System.DateTime.Now, status = "OFFLINE", isActive = true }); ;
+            _context.AddEntry(
+                new InstrumentMod
+                { 
+                    name = nickname,
+                    localAddress = address,
+                    dateAdded = DateTime.Now,
+                    status = "OFFLINE",
+                    isActive = true
+                });
+
             return RedirectToAction("Instruments", "Home");
         }
 
@@ -80,7 +120,8 @@ namespace tangenportalv2.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            HttpContext.Session.Clear();
+            return View(new Nugget() { instrumentNames = _context.getInstrumentNames() });
         }
 
         public IActionResult ViewData(int runid)

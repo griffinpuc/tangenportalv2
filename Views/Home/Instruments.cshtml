@@ -49,6 +49,29 @@
             return console.error(err.toString());
         });
 
+        function toggleInstrument(instrumentID) {
+            $.ajax({
+                url: '@Url.Action("toggleInstrument", "Home")',
+                type: "POST",
+                dataType: "json",
+                data: { instrumentID },
+                success: function (response) {
+                    if (response == 'OK') {
+
+                        var elem = document.getElementById('toggle-' + instrumentID);
+                        var outer = document.getElementById('outer-' + instrumentID);
+
+                        if (elem.hasAttribute('data-active')) {
+                            outer.innerHTML = ("<i id=\"toggle-" + instrumentID + "\" class=\"fas fa-toggle-off\"></i>");
+                        }
+                        else {
+                            outer.innerHTML = ("<i id=\"toggle-" + instrumentID + "\" data-active class=\"fas fa-toggle-on\"></i>");
+                        }
+                    }
+                }
+            });
+        }
+
     </script>
 
     <link href="~/css/load-min.css" rel="stylesheet" />
@@ -76,7 +99,6 @@
                 <a class="nav-link" href="/Home/Index"><i class="fas fa-home"></i>Dashboard</a>
                 <a class="nav-link" href="/Home/Instruments"><i class="fas fa-robot"></i>Instruments</a>
                 <a class="nav-link" href="/Home/UpdateAgent"><i class="fas fa-terminal"></i></i>Update Agent</a>
-                <a style="bottom: 0%; position: fixed;" class="nav-link" href="/Home/DevTools"><i class="fas fa-tools"></i>Admin Settings</a>
             </li>
 
             <!-- Divider -->
@@ -145,7 +167,7 @@
 
                                                                 <div id="ins_status_@instrument.ID">
                                                                     <strong style="color: lightslategrey;">
-                                                                        LOADING...
+                                                                        <div class="loader"></div>  CONNECTING...
                                                                     </strong>
                                                                 </div>
                                                                 
@@ -168,8 +190,17 @@
 
                                                     <div class="col-sm-1">
                                                         <div class="btn-group">
-                                                            <button class="btn btn-light">
-                                                                <i class="far fa-edit"></i>
+                                                            <button id="outer-@instrument.ID" class="btn btn-light" onclick="toggleInstrument(@instrument.ID);">
+
+                                                                @if (instrument.isActive)
+                                                                {
+                                                                    <i id="toggle-@instrument.ID" data-active class="fas fa-toggle-on"></i>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <i id="toggle-@instrument.ID" class="fas fa-toggle-off"></i>
+                                                                }
+
                                                             </button>
                                                             @using (Html.BeginForm("removeInstrument", "Home", FormMethod.Post))
                                                             {
@@ -218,6 +249,7 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
+    </div>
 
 
 </body>
