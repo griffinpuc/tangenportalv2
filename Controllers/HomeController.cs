@@ -70,7 +70,8 @@ namespace tangenportalv2.Controllers
             {
                 runs = info.Item1,
                 pagetotal = Math.Ceiling(info.Item2 / 10),
-                pagenum = pagenum ?? 0
+                pagenum = pagenum ?? 0,
+                totalRuns = info.Item2
             });
 
         }
@@ -97,7 +98,7 @@ namespace tangenportalv2.Controllers
             return RedirectToAction("runMain", "Home");
         }
 
-        public IActionResult addInstrument(string nickname, string address)
+        public IActionResult addInstrument(string nickname, string address, string username, string password)
         {
             _context.AddEntry(
                 new InstrumentMod
@@ -106,7 +107,9 @@ namespace tangenportalv2.Controllers
                     localAddress = address,
                     dateAdded = DateTime.Now,
                     status = "OFFLINE",
-                    isActive = true
+                    isActive = true,
+                    username = username,
+                    password = password
                 });
 
             return RedirectToAction("Instruments", "Home");

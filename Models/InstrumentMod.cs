@@ -15,6 +15,8 @@ namespace tangenportalv2.Models
         public string lastPing { get; set; }
         public DateTime dateAdded { get; set; }
         public bool isActive { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
 
     }
 }
