@@ -177,9 +177,18 @@
                                                             <div class="col-sm-3">
 
                                                                 <div id="ins_status_@instrument.ID">
-                                                                    <strong style="color: lightslategrey;">
-                                                                        <div class="loader"></div>  CONNECTING...
-                                                                    </strong>
+                                                                    @if (instrument.status.Equals("PAUSED"))
+                                                                    {
+                                                                        <strong style="color: #FFA500;">
+                                                                            <div class="loader"></div>  PAUSED  
+                                                                        </strong>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <strong style="color: lightslategrey;">
+                                                                            <div class="loader"></div>  CONNECTING...
+                                                                        </strong>
+                                                                    }
                                                                 </div>
 
                                                             </div>
@@ -190,8 +199,7 @@
                                                                 }
                                                                 else
                                                                 {
-                                                                <span><span style="color: cornflowerblue;">@instrument.localAddress</span> 
-                                                                (@Dns.GetHostAddresses(instrument.localAddress).Where(ip => ip.AddressFamily==System.Net.Sockets.AddressFamily.InterNetwork).FirstOrDefault())</span>
+                                                                    <span style="color: cornflowerblue;">@instrument.localAddress</span>
                                                                 }
                                                             </div>
                                                         </div>
@@ -256,7 +264,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Griffin Puc 2019</span>
+                        <span>Copyright &copy; Tangen Biosciences 2020</span>
                     </div>
                 </div>
             </footer>

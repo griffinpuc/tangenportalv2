@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace tangendataportalversion2.Migrations
+namespace tangenportalv2.Migrations
 {
-    public partial class testtangen : Migration
+    public partial class update : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

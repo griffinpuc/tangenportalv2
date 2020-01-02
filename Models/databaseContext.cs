@@ -30,7 +30,7 @@ namespace tangenportalv2.Models
                 run.uniqueId = (new Random().Next(0, 1040)*i).ToString();
                 run.dateTime = start.AddDays(gen.Next(range)).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
                 run.instrumentName = "CPDEV7";
-                run.DirPointer = "wwwroot/devRun/RUN_CPDEV2_11-26-19-05_28PM.txt";
+                //run.DirPointer = "wwwroot/devRun/RUN_CPDEV2_11-26-19-05_28PM.txt";
                 run.instrumentUuid = "9989898";
                 run.kitLotId = "1111122";
 
@@ -152,11 +152,16 @@ namespace tangenportalv2.Models
             SaveChanges();
         }
 
+        public string getRawPath(int runID)
+        {
+            return (from RunMod in RunTable where RunMod.RunId == runID select RunMod.directoryPath + "\\" + RunMod.fileName).FirstOrDefault();
+        }
+
         public RunMod getRun(int id)
         {
             return (from RunMod in RunTable 
-                    where RunMod.Id == id 
-                    select RunMod).Include(p => p.targets).FirstOrDefault();
+                    where RunMod.RunId == id 
+                    select RunMod).Include(p => p.results).Include(p => p.targets).Include(p => p.wells).FirstOrDefault();
         }
 
         public InstrumentMod[] getInstruments()

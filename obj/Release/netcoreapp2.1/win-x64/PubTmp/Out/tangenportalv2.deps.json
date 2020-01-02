@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.1": {
       "tangenportalv2/1.0.0": {
         "dependencies": {
+          "DotNetZip": "1.13.5",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
@@ -34,6 +35,16 @@
         },
         "compile": {
           "tangenportalv2.dll": {}
+        }
+      },
+      "DotNetZip/1.13.5": {
+        "dependencies": {
+          "System.Security.Permissions": "4.5.0",
+          "System.Text.Encoding.CodePages": "4.5.0",
+          "System.Text.Encoding.Extensions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DotNetZip.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -2931,6 +2942,9 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0",
           "System.Runtime.CompilerServices.Unsafe": "4.5.1"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         }
       },
       "System.Text.Encoding.Extensions/4.3.0": {
@@ -3099,6 +3113,7 @@
     ".NETCoreApp,Version=v2.1/win-x64": {
       "tangenportalv2/1.0.0": {
         "dependencies": {
+          "DotNetZip": "1.13.5",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
@@ -3109,6 +3124,19 @@
         },
         "runtime": {
           "tangenportalv2.dll": {}
+        }
+      },
+      "DotNetZip/1.13.5": {
+        "dependencies": {
+          "System.Security.Permissions": "4.5.0",
+          "System.Text.Encoding.CodePages": "4.5.0",
+          "System.Text.Encoding.Extensions": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotNetZip.dll": {
+            "assemblyVersion": "1.13.5.0",
+            "fileVersion": "1.13.5.0"
+          }
         }
       },
       "Microsoft.AspNetCore.Razor.Design/2.1.2": {},
@@ -3404,6 +3432,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DotNetZip/1.13.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-V2uP/MIsWlG/AmM6gqo5nh0gHud5B4TIc7dPg4zp87UR0I8x8CPKXkSVUvXKEHpBxTMd60Hm5xB8If3l7SI6JQ==",
+      "path": "dotnetzip/1.13.5",
+      "hashPath": "dotnetzip.1.13.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Razor.Design/2.1.2": {
       "type": "package",

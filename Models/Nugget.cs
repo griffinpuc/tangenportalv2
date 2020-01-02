@@ -17,6 +17,8 @@ namespace tangenportalv2.Models
         public double pagetotal { get; set; }
         public double totalRuns { get; set; }
         public string[] instrumentNames { get; set; }
+        public string error { get; set; }
+        public LogModel logmodel { get; set; }
 
     }
 }
