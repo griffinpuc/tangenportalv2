@@ -131,27 +131,36 @@
                                         <div class="row">
                                             @using (Html.BeginForm("addInstrument", "Home", FormMethod.Post))
                                             {
-                                                <div class="form-inline" style="margin-top:15px;">
-                                                    <div class="col">
-                                                        <input required class="form-control" placeholder="Nickname" type="text" name="nickname" />
-                                                    </div>
-                                                    <div class="col">
-                                                        <input required class="form-control" placeholder="Address or name" type="text" name="address" />
-                                                    </div>
+                                            <div class="form-inline" style="margin-top:15px;">
+                                                <div class="col">
+                                                    <input required class="form-control" placeholder="Nickname" type="text" name="nickname" />
                                                 </div>
-                                                <div class="form-inline" style="margin-top:15px;">
-                                                    <div class="col">
-                                                        <input required class="form-control" placeholder="Device username" type="text" name="username" />
-                                                    </div>
-                                                    <div class="col">
-                                                        <input class="form-control" placeholder="Device password" type="password" name="password" />
-                                                    </div>
+                                                <div class="col">
+                                                    <input required class="form-control" placeholder="Address or name" type="text" name="address" />
                                                 </div>
-                                                <div class="form-inline" style="margin-top:15px;">
-                                                    <div class="col">
-                                                        <button required type="submit" class="btn btn-primary" style="width: 300px;">Add</button>
-                                                    </div>
+                                            </div>
+                                            <div class="form-inline" style="margin-top:15px;">
+                                                <div class="col">
+                                                    <input required class="form-control" placeholder="Device username" type="text" name="username" />
                                                 </div>
+                                                <div class="col">
+                                                    <input class="form-control" placeholder="Device password" type="password" name="password" />
+                                                </div>
+                                            </div>
+                                            <div class="dropdown form-inline" style="margin-top:15px; margin-left: 12px;">
+                                                <select class="form-control" id="sel1" name="storagepath">
+                                                    @foreach(StoragePath path in Model.paths)
+                                                    {
+                                                        <option>@path.path</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="form-inline" style="margin-top:15px;">
+                                                <div class="col">
+                                                    <button required type="submit" class="btn btn-primary" style="width: 300px;">Add</button>
+                                                </div>
+                                            </div>
+
                                             }
                                         </div>
                                     </div>

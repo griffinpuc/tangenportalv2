@@ -13,6 +13,7 @@ namespace tangenportalv2.Models
         public DbSet<RunMod> RunTable { get; set; }
         public DbSet<InstrumentMod> InstrumentTable { get; set; }
         public DbSet<BatchModel> BatchTable { get; set; }
+        public DbSet<StoragePath> PathTable { get; set; }
 
         public void bigPush(int size)
         {
@@ -58,6 +59,17 @@ namespace tangenportalv2.Models
         {
             Update(obj);
             SaveChanges();
+        }
+
+        public void addPath(string path)
+        {
+            Add(new StoragePath() { path = path });
+            SaveChanges();
+        }
+
+        public StoragePath[] getPaths()
+        {
+            return (from StoragePath in PathTable select StoragePath).ToArray();
         }
 
         public BatchModel[] getBatches()

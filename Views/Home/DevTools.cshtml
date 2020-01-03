@@ -74,109 +74,20 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <!-- Partial page begin-->
-                <div id="mainview" class="animated bounceInLeft">
-
-                    <style>
-
-                        th, td {
-                            border: 1px solid black;
-                            padding: 10px;
-                        }
-
-                        table {
-                            border: 1px solid black;
-                            margin-top: 5vh;
-                        }
-
-                        .section {
-                            margin-left: 25px;
-                            margin-bottom: 5vh;
-                        }
-                    </style>
-
-                    <div style="margin-left: 15px;">
-
-                        <h3>Database populate</h3>
-                        <div class="section">
-
-                            <table>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Path</th>
-                                    <th></th>
-                                </tr>
-
-                                @foreach (BatchModel batch in Model.batches)
-                                {
-                                    <tr>
-                                        <td style="font-weight: bold;">@batch.batchName</td>
-                                        <td>@batch.batchURL</td>
-                                        <td>
-                                            @using (Html.BeginForm("runBatch", "Home", FormMethod.Post))
-                                            {
-                                                <input type="hidden" value="@batch.ID" name="batchid" id="batchid" />
-                                                <button class="btn btn-primary" style="margin: 2px;" type="submit">Run Batch</button>
-                                            }
-                                        </td>
-                                        <td>
-                                            @using (Html.BeginForm("deleteBatch", "Home"))
-                                            {
-                                                @Html.Hidden("batch", batch)
-                                                <input type="hidden" value="@batch" name="batch" id="batch" />
-                                                <button class="btn btn-warning" style="margin: 2px;" type="submit">Delete Batch</button>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-
-                            <h5 style="margin-top: 50px;">Point to test batch</h5>
-
-                            @using (Html.BeginForm("addBatch", "Home", FormMethod.Post))
-                            {
-                                <table>
-                                    <tr>
-                                        <td><input class="form-control" type="text" placeholder="Batch name" name="batchname" id="batchname" /></td>
-                                        <td><input class="form-control" type="text" placeholder="Batch URL" name="batchurl" id="batchurl" /></td>
-                                        <td><button class="btn btn-primary" style="margin: 2px;" type="submit">Add</button></td>
-                                    </tr>
-                                </table>
-                            }
+                <div id="mainview" class="animated bounceInLeft" style="margin-left: 50px;  ">
 
 
+                    @using (Html.BeginForm("addStoragePath", "Home", FormMethod.Post))
+                    {
+
+                        <div class="form-group">
+                            <input style="width: 500px;" class="form-control" type="text" name="storagepath" placeholder="Storage Path" />
+                            <button class="btn btn-primary" type="submit">Add Path</button>
                         </div>
 
-                        <h3>Clean table:</h3>
-                        <div class="section">
-                            <table>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Entries</th>
-                                    <th></th>
-                                </tr>
+                    }
 
-                                <tr>
-                                    <td>Runs</td>
-                                    <td>???</td>
-                                    <td><button class="btn btn-danger">Clear table</button></td>
-                                </tr>
 
-                                <tr>
-                                    <td>Instruments</td>
-                                    <td>???</td>
-                                    <td><button class="btn btn-danger">Clear table</button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>Something</td>
-                                    <td>???</td>
-                                    <td><button class="btn btn-danger">Clear table</button></td>
-                                </tr>
-
-                            </table>
-                        </div>
-
-                    </div>
                 </div>
 
 

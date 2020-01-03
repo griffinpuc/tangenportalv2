@@ -43,7 +43,7 @@ namespace AspNetCore
             WriteLiteral("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
             EndContext();
             BeginContext(45, 36, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "99d604728450451bad0ea5467c29fd90", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "094e1c6515cf4041a8aa183d903413d1", async() => {
                 BeginContext(51, 23, true);
                 WriteLiteral("\r\n    <title></title>\r\n");
                 EndContext();
@@ -63,7 +63,7 @@ namespace AspNetCore
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(83, 93, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "92c7038159794622bf36e0de3961b8f0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "051e96760d814b17886b0df692525559", async() => {
                 BeginContext(89, 80, true);
                 WriteLiteral("\r\n    <h4>Error requesting log file, the file doesn\'t exist in the sytem:</h4>\r\n");
                 EndContext();

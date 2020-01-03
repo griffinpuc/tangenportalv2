@@ -19,6 +19,7 @@ namespace tangenportalv2.Models
         public string[] instrumentNames { get; set; }
         public string error { get; set; }
         public LogModel logmodel { get; set; }
+        public StoragePath[] paths { get; set; }
 
     }
 }

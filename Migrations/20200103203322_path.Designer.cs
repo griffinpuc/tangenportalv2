@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tangenportalv2.Models;
 
 namespace tangenportalv2.Migrations
 {
     [DbContext(typeof(databaseContext))]
-    partial class databaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200103203322_path")]
+    partial class path
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,8 +57,6 @@ namespace tangenportalv2.Migrations
                     b.Property<string>("password");
 
                     b.Property<string>("status");
-
-                    b.Property<string>("storagepath");
 
                     b.Property<string>("username");
 

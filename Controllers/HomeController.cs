@@ -103,7 +103,7 @@ namespace tangenportalv2.Controllers
             return RedirectToAction("runMain", "Home");
         }
 
-        public IActionResult addInstrument(string nickname, string address, string username, string password)
+        public IActionResult addInstrument(string nickname, string address, string username, string password, string storagepath)
         {
             _context.AddEntry(
                 new InstrumentMod
@@ -114,10 +114,17 @@ namespace tangenportalv2.Controllers
                     status = "OFFLINE",
                     isActive = true,
                     username = username,
-                    password = password
+                    password = password,
+                    storagepath = storagepath
                 });
 
             return RedirectToAction("Instruments", "Home");
+        }
+
+        public IActionResult addStoragePath(string storagepath)
+        {
+            _context.addPath(storagepath);
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult removeInstrument(int id)
@@ -267,7 +274,7 @@ namespace tangenportalv2.Controllers
 
         public IActionResult Instruments()
         {
-            return View(new Nugget() { instruments = _context.getInstruments() });
+            return View(new Nugget() { instruments = _context.getInstruments(), paths = _context.getPaths() });
         }
 
         public IActionResult Metrics()
