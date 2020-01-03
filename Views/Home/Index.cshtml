@@ -29,7 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-        
+
         function MainLoad() {
             $.ajax({
                 url: '@Url.Action("runMain", "Home")',
@@ -74,7 +74,13 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Index">
-                <div class="sidebar-brand-text mx-3">Tangen Portal <sup>2</sup></div>
+                <div class="col">
+                    <div class="row">
+                        <div class="sidebar-brand-text mx-3">Tangen Portal</div>
+                    </div>
+                </div>
+                
+                
             </a>
 
             <!-- Divider -->
