@@ -38,7 +38,7 @@ namespace tangen_dataportal_version2
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
-            services.AddDbContext<databaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("dbConnection")));
+            services.AddDbContext<databaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("devConnection")));
             services.AddSession();
         }
 
