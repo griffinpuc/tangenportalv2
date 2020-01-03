@@ -2,6 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using Ionic.Zip;
 using tangenportalv2.Models;
 
 namespace tangenportalv2.Controllers
@@ -70,7 +75,8 @@ namespace tangenportalv2.Controllers
             {
                 runs = info.Item1,
                 pagetotal = Math.Ceiling(info.Item2 / 10),
-                pagenum = pagenum ?? 0
+                pagenum = pagenum ?? 0,
+                totalRuns = info.Item2
             });
 
         }
@@ -97,7 +103,7 @@ namespace tangenportalv2.Controllers
             return RedirectToAction("runMain", "Home");
         }
 
-        public IActionResult addInstrument(string nickname, string address)
+        public IActionResult addInstrument(string nickname, string address, string username, string password)
         {
             _context.AddEntry(
                 new InstrumentMod
@@ -106,7 +112,9 @@ namespace tangenportalv2.Controllers
                     localAddress = address,
                     dateAdded = DateTime.Now,
                     status = "OFFLINE",
-                    isActive = true
+                    isActive = true,
+                    username = username,
+                    password = password
                 });
 
             return RedirectToAction("Instruments", "Home");
@@ -122,6 +130,104 @@ namespace tangenportalv2.Controllers
         {
             HttpContext.Session.Clear();
             return View(new Nugget() { instrumentNames = _context.getInstrumentNames() });
+        }
+
+        public FileResult batchDownload(string runids)
+        {
+            List<string> filepaths = new List<string>();
+
+            foreach (string runid in runids.Split(","))
+            {
+                filepaths.Add(_context.getRawPath(Convert.ToInt32(runid.Split("-")[1])).Replace("json", "txt"));
+            }
+
+            //filepaths.Add(@"C:\Users\griff\Downloads\RUN_20191223_164427_CP53.json");
+
+            using (Ionic.Zip.ZipFile zip = new Ionic.Zip.ZipFile())
+            {
+                zip.AlternateEncodingUsage = ZipOption.AsNecessary;
+                zip.AddDirectoryByName("runs");
+                foreach (string filepath in filepaths)
+                {
+                    zip.AddFile(filepath, "runs");
+                }
+                string zipName = String.Format("RawArchive_{0}.zip", DateTime.Now.ToString("yyyy-MMM-dd-HHmmss"));
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    zip.Save(memoryStream);
+                    return File(memoryStream.ToArray(), "application/zip", zipName);
+                }
+            }
+        }
+
+        public FileResult downloadHandlerRaw(int runid)
+        {
+            string path = _context.getRawPath(runid).Replace("json", "txt");
+            string filename = path.Split("\\").Last();
+
+            if (System.IO.File.Exists(path))
+            {
+                try
+                {
+                    FileStream fs = System.IO.File.OpenRead(path);
+                    return File(fs, "text/plain", filename);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+            }
+
+            return null;
+        }
+
+        public ActionResult downloadLog(int runid)
+        {
+            string path = _context.getRawPath(runid).Replace("json", "txt").Replace("RAW", "LOG");
+            string filename = path.Split("\\").Last();
+
+            if (System.IO.File.Exists(path))
+            {
+                try
+                {
+                    FileStream fs = System.IO.File.OpenRead(path);
+                    return File(fs, "text/plain", filename);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+            }
+
+            return RedirectToAction("runPage", "Home", runid);
+        }
+
+        public IActionResult runPage(int runid)
+        {
+            LogModel graph = new LogModel();
+            RunMod run = new RunMod();
+
+            try
+            {
+                graph = new LogModel().parseFile(_context.getRawPath(runid).Replace("RAW", "LOG").Replace("json", "txt"));
+                run = _context.getRun(runid);
+            }
+            catch
+            {
+
+            }
+
+            //LogModel graph = new LogModel().parseFile(@"C:\Users\griff\Downloads\LOG_20191227_142654__CP53.txt");
+
+            return View(new Nugget() { logmodel = graph, run = run });
+
+        }
+
+        public IActionResult LogError()
+        {
+            return View();
         }
 
         public IActionResult ViewData(int runid)

@@ -1,0 +1,112 @@
+﻿@using tangenportalv2.Models;
+@model Nugget;
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title>@Model.run.uniqueId</title>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="~/js/jquery.js"></script>
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/bootstrap/js/bootstrap.js"></script>
+
+</head>
+
+<body style="font-family: 'Ubuntu Mono', monospace; padding: 25px;">
+
+    <div class="row" style="text-align: center; margin-bottom: 50px;">
+        <div class="col">
+
+            <div class="row" style="margin-bottom: 50px;">
+                <div class="col">
+                    <h2>Run: <strong style="color: cornflowerblue;">@Model.run.uniqueId</strong></h2>
+                    <h3>@Model.run.dateTime</h3>
+                </div>
+
+            </div>
+
+            <div class="row" style="display: block; text-align: center;">
+                @using (Html.BeginForm("downloadHandlerRaw", "Home", FormMethod.Post))
+                {
+                    <input hidden value="@Model.run.RunId" id="runid" name="runid" />
+                    @if (Model.run.uniqueId == null)
+                    {
+                        <button disabled class="btn btn-sm btn-secondary">Download raw data</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-sm btn-secondary">Download raw data</button>
+                    }
+
+                }
+            </div>
+
+            <div class="row" style="display: block; text-align: center;">
+                @using (Html.BeginForm("downloadLog", "Home", FormMethod.Post))
+                {
+                    <input hidden value="@Model.run.RunId" id="runid" name="runid" />
+                    @if (Model.run.uniqueId == null)
+                    {
+                        <button disabled class="btn btn-sm btn-secondary">Download run log file</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-sm btn-secondary">Download run log file</button>
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="ct-chart" id="chart2" style="width: 100vw; height: 45vh; color: black; margin-top: 5vh;"></div>
+
+        <script>
+            var plate = ('@Model.logmodel.plate').split(",");
+            var tube = ('@Model.logmodel.tube').split(",");
+            var diskTop = ('@Model.logmodel.diskTop').split(",");
+            var diskBottom = ('@Model.logmodel.diskBottom').split(",");
+            var fluidTemp = ('@Model.logmodel.fluidTemp').split(",");
+            var piezoCurrent = ('@Model.logmodel.piezoCurrent').split(",");
+            var data = {
+                series: [{"name": "test1", "data":plate}, tube, diskTop, diskBottom, fluidTemp, piezoCurrent]
+            }
+            var options = {
+                showPoint: false,
+                showArea: true,
+                fullWidth: true
+            }
+            new Chartist.Line(
+                '#chart2',
+                data,
+                options
+            );
+        </script>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-body" style="text-align: left;">
+                    <pre class="prettyprint">@Model.run.getJSON()</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
+

@@ -5,7 +5,9 @@
 
 <script>
 
-    loadPageination( parseInt((Math.floor(@Model.pagenum / 10) * 10).toString()[0], 10) );
+    loadPageination(parseInt((Math.floor(@Model.pagenum / 10) * 10).toString()[0], 10) );
+    var totalruns = @Model.totalRuns;
+    selectdownload.hidden = true;
 
     function loadPageination(offset) {
 
@@ -39,88 +41,180 @@
         }
     }
 
+    function toggleChecked(instrumentID) {
+
+        var elem = document.getElementById("run-" + instrumentID);
+        var check = document.getElementById("check-" + instrumentID);
+        var info = document.getElementById("toptext");
+        var selectdownload = document.getElementById("selectdownload");
+        var length = document.querySelectorAll('input[type="checkbox"]:checked').length;
+
+        if (check.checked) {
+            elem.style.borderLeftColor = "#f58a07";
+            elem.style.backgroundColor = "#F5F5F5";
+        }
+        else {
+            elem.style.backgroundColor = "white";
+            elem.style.borderLeftColor = "cornflowerblue";
+        }
+
+        if (length > 0) {
+            info.innerHTML = ("<strong><span style=\"color: #f58a07;\">Selected runs: </span>" + (document.querySelectorAll('input[type="checkbox"]:checked').length) + "</strong>");
+            selectdownload.hidden = false;
+            var checkedIds = Array();
+            $('input:checkbox:checked').each( function(i,v)
+            {
+                checkedIds.push($(v).attr('id'));
+            });
+            document.getElementById("runids").setAttribute("value", checkedIds)
+        }
+        else {
+            info.innerHTML = "<strong class=\"animated flipInX\" ><span style=\"color: cornflowerblue;\">Total runs: </span>" + totalruns + "</strong>";
+            selectdownload.hidden = true;
+        }
+    }
+
+    @*function downloadBatch() {
+
+        var checkedIds = Array();
+        $('input:checkbox:checked').each( function(i,v)
+        {
+            checkedIds.push($(v).attr('id'));
+        });
+
+        //fetch('/home/batchDownload' + $.param({checkedIds: checkedIds }), {
+        //    method: 'post'
+        //})
+
+        var url = new URL("/home/batchDownload"),
+            params = {checkedIds: checkedIds}
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+        fetch(url)
+
+        $.ajax({
+            url: '@Url.Action("batchDownload", "Home")',
+            traditional: true,
+            data: { checkedIds: checkedIds },
+            success: function (data) {
+                alert("hi");
+            },
+        });
+    }*@
+
 </script>
 
 <div id="mainview">
     <div class="container-fluid">
 
-        <div class="row">
-            <div class="col-sm-2">
-
+        <div class="row" style="margin-bottom: 30px;">
+            <div id="toptext" class="col-sm-2 animated flipInX" style="margin-top: 7px;">
+                <strong class="animated flipInX"><span style="color: cornflowerblue;">Total runs: </span>@Model.totalRuns</strong>
+            </div>
+            <div id="selectdownload" class="col">
+                @using (Html.BeginForm("batchDownload", "Home"))
+                {
+                    <input type="hidden" value="" id="runids" name="runids" />
+                    <button type="submit" class="btn btn-link animated flipInX" style="color: #f58a07;">Download selected</button>
+                }
             </div>
         </div>
 
 
         @foreach (RunMod run in Model.runs)
         {
-            <div class="card animated bounceInLeft" style="display:block; border-left-color: cornflowerblue; border-left-width: 7px; width: 40vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
-                <div class="card-body">
+        <div class="row">
+            <div class="col-sm-5">
+                <div id="run-@run.RunId" class="card animated bounceInLeft" style="border-left-color: cornflowerblue; border-left-width: 7px; width: auto; height:75px; text-align: left; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                    <div class="card-body">
 
-                    <div class="row">
-
-                        <div class="col-sm-7">
-                            <div class="row">
-                                <div class="col" style="font-weight: bolder; color: cornflowerblue">
-                                    #@run.uniqueId
+                        <div class="row">
+                            <div class="form-check col-xs-1">
+                                <input id="check-@run.RunId" type="checkbox" class="form-check-input" style="color: blue;" onclick="toggleChecked(@run.RunId);">
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col" style="font-weight: bolder; color: cornflowerblue">
+                                        #@run.uniqueId
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        @run.dateTime.Replace("T", " ").Replace("Z", "")
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    @Convert.ToDateTime(run.dateTime)
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-sm-5">
-                            <div class="row" style="text-align: right;">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    @using (Html.BeginForm("ViewJson", "Home", FormMethod.Post, new { target = "_blank" }))
-                                    {
-                                        <input hidden value="@run.Id" id="runid" name="runid" />
-                                        <button class="btn btn-sm btn-primary" style="margin-right: 10px;">View  <i class="far fa-chart-bar"></i></button>
-                                    }
-                                    @using (Html.BeginForm("DownloadRun", "Home", FormMethod.Post))
-                                    {
-                                        <button class="btn btn-sm btn-secondary">Download Archive  <i class="fas fa-download"></i></button>
-                                    }
-                                </div>
-                            </div>
                         </div>
 
                     </div>
-
                 </div>
             </div>
+            <div class="col-sm-3 animated" id="buttonpanel">
+                <div class="card animated bounceInLeft" style="display: inline-block; padding-left:10px; padding-right: 10px; width: auto; height:75px; text-align: left; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                    <div class="card-body">
 
-        }
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="row" style="text-align: right;">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        @using (Html.BeginForm("RunPage", "Home", FormMethod.Post, new { target = "_blank" }))
+                                        {
+                                            <input hidden value="@run.RunId" id="runid" name="runid" />
+                                            <button id="viewbutton" class="btn btn-sm btn-primary" style="margin-right: 10px;">View  <i class="far fa-chart-bar"></i></button>
+                                        }
+                                        @using (Html.BeginForm("downloadHandlerRaw", "Home", FormMethod.Post))
+                                        {
+                                            <input hidden value="@run.RunId" id="runid" name="runid" />
+                                            <button id="downloadbutton" class="btn btn-sm btn-secondary">Download <i class="fas fa-download"></i></button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            }
 
         @for (int missrun = 1; missrun <= 10 - Model.runs.Length; missrun++)
         {
-            <div class="card animated bounceInLeft" style="display:block; border-left-color: lightgray; background-color:whitesmoke; border-left-width: 7px;  width: 40vw; height:75px; text-align: left; left: auto; right: auto; margin-bottom: 1vh;">
-                <div class="card-body">
 
-                    <div class="row">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="card animated bounceInLeft" style="border-left-color: lightgray; background-color:whitesmoke; border-left-width: 7px; width: auto; height:75px; text-align: left; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                    <div class="card-body">
 
-                        <div class="col">
-                            <div class="row">
-                                <div class="col" style="font-weight: bolder; ">
-                                </div>
-                                <div class="col">
-                                    <div class="row" style="color: lightgray; font-weight: bold;">
-                                    </div>
-                                    <div class="row" style="color: lightgray;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="row">
 
-                        <div class="col">
                         </div>
 
                     </div>
-
                 </div>
             </div>
+            <div class="col-sm-3 animated" id="buttonpanel">
+                <div class="card animated bounceInLeft" style="border-left-color: lightgray; background-color:whitesmoke; display: inline-block; padding-left:10px; padding-right: 10px; width: auto; height:75px; text-align: left; margin-bottom: 1vh; box-shadow: #f0f0f0 4px 4px;">
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="row" style="text-align: right;">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button disabled id="viewbutton" class="btn btn-sm btn-secondary" style="visibility: hidden; margin-right: 10px;">View  <i class="far fa-chart-bar"></i></button>
+                                        <button disabled id="downloadbutton" class="btn btn-sm btn-secondary" style="visibility: hidden;">Download <i class="fas fa-download"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         }
 
         <nav>

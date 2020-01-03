@@ -22,8 +22,6 @@ C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-datapo
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\Instruments.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\RunMain.cshtml.g.cs
-C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\ViewData.cshtml.g.cs
-C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\ViewJson.cshtml.g.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\tangenportalv2.RazorTargetAssemblyInfo.cache
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\tangenportalv2.RazorTargetAssemblyInfo.cs
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\tangenportalv2.Views.pdb
@@ -31,3 +29,5 @@ C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-datapo
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\tangenportalv2.dll
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\tangenportalv2.pdb
 C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\UpdateAgent.cshtml.g.cs
+C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\LogError.cshtml.g.cs
+C:\Users\griff\Workspace\tangenportalv2\tangen-dataportal-version2\tangen-dataportal-version2\obj\Release\netcoreapp2.1\win-x64\Razor\Views\Home\RunPage.cshtml.g.cs

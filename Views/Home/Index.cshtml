@@ -29,7 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-
+        
         function MainLoad() {
             $.ajax({
                 url: '@Url.Action("runMain", "Home")',
@@ -109,11 +109,11 @@
                         <div class="dropdown-menu" aria-labelledby="instrumentFilter">
                             @using (Html.BeginForm("Index", "Home", FormMethod.Post))
                             {
-                                <button type="submit" class="dropdown-item" type="button">All instruments</button>
+                            <button type="submit" class="dropdown-item" type="button">All instruments</button>
                             }
                             @foreach (string instrument in Model.instrumentNames)
                             {
-                                <button id="filter-@instrument" onclick="getFromInstrument('@instrument');" class="dropdown-item" type="button">@instrument</button>
+                            <button id="filter-@instrument" onclick="getFromInstrument('@instrument');" class="dropdown-item" type="button">@instrument</button>
                             }
                         </div>
                     </div>
@@ -122,8 +122,9 @@
 
                     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
                     {
-                        <button style="margin-left: 20px;" class="btn btn-outline-primary">Reset</button>
+                    <button style="margin-left: 20px;" class="btn btn-outline-primary">Reset</button>
                     }
+
 
                     <script>
                         const fp1 = flatpickr("#datepick", {
@@ -147,7 +148,7 @@
                             });
                     </script>
 
-                    </nav>
+                </nav>
             </div>
 
 
@@ -165,7 +166,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Griffin Puc 2019</span>
+                        <span>Copyright &copy; Tangen Biosciences 2020</span>
                     </div>
                 </div>
             </footer>

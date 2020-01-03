@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tangenportalv2.Models;
 
-namespace tangendataportalversion2.Migrations
+namespace tangenportalv2.Migrations
 {
     [DbContext(typeof(databaseContext))]
-    [Migration("20191218162430_ins-update")]
-    partial class insupdate
+    [Migration("20200102212252_update")]
+    partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,11 @@ namespace tangendataportalversion2.Migrations
 
                     b.Property<string>("name");
 
+                    b.Property<string>("password");
+
                     b.Property<string>("status");
+
+                    b.Property<string>("username");
 
                     b.HasKey("ID");
 
@@ -67,7 +71,7 @@ namespace tangendataportalversion2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("RunModId");
+                    b.Property<int>("RunModId");
 
                     b.Property<string>("name");
 
@@ -84,17 +88,19 @@ namespace tangendataportalversion2.Migrations
 
             modelBuilder.Entity("tangenportalv2.Models.RunMod", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RunId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DirPointer");
 
                     b.Property<string>("assayId");
 
                     b.Property<string>("assayName");
 
                     b.Property<string>("dateTime");
+
+                    b.Property<string>("directoryPath");
+
+                    b.Property<string>("fileName");
 
                     b.Property<string>("instrumentName");
 
@@ -106,7 +112,7 @@ namespace tangendataportalversion2.Migrations
 
                     b.Property<string>("uniqueId");
 
-                    b.HasKey("Id");
+                    b.HasKey("RunId");
 
                     b.ToTable("RunTable");
                 });
@@ -117,7 +123,7 @@ namespace tangendataportalversion2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("RunModId");
+                    b.Property<int>("RunModId");
 
                     b.Property<string>("name");
 
@@ -140,7 +146,7 @@ namespace tangendataportalversion2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("RunModId");
+                    b.Property<int>("RunModId");
 
                     b.Property<string>("cq");
 
@@ -157,23 +163,26 @@ namespace tangendataportalversion2.Migrations
 
             modelBuilder.Entity("tangenportalv2.Models.ResultMod", b =>
                 {
-                    b.HasOne("tangenportalv2.Models.RunMod")
+                    b.HasOne("tangenportalv2.Models.RunMod", "RunMod")
                         .WithMany("results")
-                        .HasForeignKey("RunModId");
+                        .HasForeignKey("RunModId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("tangenportalv2.Models.TargetMod", b =>
                 {
-                    b.HasOne("tangenportalv2.Models.RunMod")
+                    b.HasOne("tangenportalv2.Models.RunMod", "RunMod")
                         .WithMany("targets")
-                        .HasForeignKey("RunModId");
+                        .HasForeignKey("RunModId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("tangenportalv2.Models.WellMod", b =>
                 {
-                    b.HasOne("tangenportalv2.Models.RunMod")
+                    b.HasOne("tangenportalv2.Models.RunMod", "RunMod")
                         .WithMany("wells")
-                        .HasForeignKey("RunModId");
+                        .HasForeignKey("RunModId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

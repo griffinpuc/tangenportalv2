@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace tangendataportalversion2.Migrations
+namespace tangenportalv2.Migrations
 {
     public partial class init : Migration
     {
@@ -33,7 +33,10 @@ namespace tangendataportalversion2.Migrations
                     localAddress = table.Column<string>(nullable: true),
                     status = table.Column<string>(nullable: true),
                     lastPing = table.Column<string>(nullable: true),
-                    dateAdded = table.Column<DateTime>(nullable: false)
+                    dateAdded = table.Column<DateTime>(nullable: false),
+                    isActive = table.Column<bool>(nullable: false),
+                    username = table.Column<string>(nullable: true),
+                    password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,7 +47,7 @@ namespace tangendataportalversion2.Migrations
                 name: "RunTable",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    RunId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     sampleId = table.Column<string>(nullable: true),
                     uniqueId = table.Column<string>(nullable: true),
@@ -54,11 +57,12 @@ namespace tangendataportalversion2.Migrations
                     kitLotId = table.Column<string>(nullable: true),
                     instrumentUuid = table.Column<string>(nullable: true),
                     instrumentName = table.Column<string>(nullable: true),
-                    DirPointer = table.Column<string>(nullable: true)
+                    directoryPath = table.Column<string>(nullable: true),
+                    fileName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RunTable", x => x.Id);
+                    table.PrimaryKey("PK_RunTable", x => x.RunId);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,17 +74,17 @@ namespace tangendataportalversion2.Migrations
                     name = table.Column<string>(nullable: true),
                     outcomeCode = table.Column<string>(nullable: true),
                     outcomeString = table.Column<string>(nullable: true),
-                    RunModId = table.Column<int>(nullable: true)
+                    RunId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ResultMod", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ResultMod_RunTable_RunModId",
-                        column: x => x.RunModId,
+                        name: "FK_ResultMod_RunTable_RunId",
+                        column: x => x.RunId,
                         principalTable: "RunTable",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "RunId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,17 +97,17 @@ namespace tangendataportalversion2.Migrations
                     name = table.Column<string>(nullable: true),
                     outcomeCode = table.Column<string>(nullable: true),
                     outcomeString = table.Column<string>(nullable: true),
-                    RunModId = table.Column<int>(nullable: true)
+                    RunId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TargetMod", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TargetMod_RunTable_RunModId",
-                        column: x => x.RunModId,
+                        name: "FK_TargetMod_RunTable_RunId",
+                        column: x => x.RunId,
                         principalTable: "RunTable",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "RunId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -115,33 +119,33 @@ namespace tangendataportalversion2.Migrations
                     wellId = table.Column<string>(nullable: true),
                     species = table.Column<string>(nullable: true),
                     cq = table.Column<string>(nullable: true),
-                    RunModId = table.Column<int>(nullable: true)
+                    RunId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WellMod", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WellMod_RunTable_RunModId",
-                        column: x => x.RunModId,
+                        name: "FK_WellMod_RunTable_RunId",
+                        column: x => x.RunId,
                         principalTable: "RunTable",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "RunId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ResultMod_RunModId",
+                name: "IX_ResultMod_RunId",
                 table: "ResultMod",
-                column: "RunModId");
+                column: "RunId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TargetMod_RunModId",
+                name: "IX_TargetMod_RunId",
                 table: "TargetMod",
-                column: "RunModId");
+                column: "RunId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WellMod_RunModId",
+                name: "IX_WellMod_RunId",
                 table: "WellMod",
-                column: "RunModId");
+                column: "RunId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

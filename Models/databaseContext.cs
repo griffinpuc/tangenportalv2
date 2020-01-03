@@ -14,6 +14,31 @@ namespace tangenportalv2.Models
         public DbSet<InstrumentMod> InstrumentTable { get; set; }
         public DbSet<BatchModel> BatchTable { get; set; }
 
+        public void bigPush(int size)
+        {
+            for (int i=0; i<size; i++)
+            {
+                DateTime start = new DateTime(2019, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                Random gen = new Random();
+                //start.AddDays(gen.Next(range));
+
+                RunMod run = new RunMod();
+                run.assayId = "1101";
+                run.assayName = "Candida Neg Ctl";
+                run.sampleId = "CPDEV2KRKKK";
+                run.uniqueId = (new Random().Next(0, 1040)*i).ToString();
+                run.dateTime = start.AddDays(gen.Next(range)).ToString("yyyy-MM-ddTHH:mm:ss.fffffffK");
+                run.instrumentName = "CPDEV7";
+                //run.DirPointer = "wwwroot/devRun/RUN_CPDEV2_11-26-19-05_28PM.txt";
+                run.instrumentUuid = "9989898";
+                run.kitLotId = "1111122";
+
+                Add(run);
+                SaveChanges();
+            }
+        }
+
 
         public void AddEntry(object obj)
         {
@@ -89,11 +114,13 @@ namespace tangenportalv2.Models
                 RunMod[] runs = (from RunMod in RunTable
                                  where Convert.ToDateTime(RunMod.dateTime) >= startDate 
                                  && Convert.ToDateTime(RunMod.dateTime) <= endDate
+                                 && RunMod.instrumentName.Equals(instrumentName)
                                  select RunMod).Skip(pagenum * 10).Take(10).ToArray();
 
                 int count = (from RunMod in RunTable
                              where Convert.ToDateTime(RunMod.dateTime) >= startDate
                              && Convert.ToDateTime(RunMod.dateTime) <= endDate
+                             && RunMod.instrumentName.Equals(instrumentName)
                              select RunMod).Count();
 
                 retval = Tuple.Create(runs, (double)count);
@@ -125,26 +152,16 @@ namespace tangenportalv2.Models
             SaveChanges();
         }
 
-        //public RunMod[] getRuns(int pagenum)
-        //{
-        //    return (from RunMod in RunTable 
-        //            orderby RunMod.dateTime descending 
-        //            select RunMod).Skip(pagenum*10).Take(10).ToArray();
-        //}
-
-        //public RunMod[] getRunsInstrument(int pagenum, string instrumentName)
-        //{
-        //    return (from RunMod in RunTable 
-        //            orderby RunMod.dateTime descending 
-        //            where RunMod.instrumentName.Equals(instrumentName) 
-        //            select RunMod).Skip(pagenum * 10).Take(10).ToArray();
-        //}
+        public string getRawPath(int runID)
+        {
+            return (from RunMod in RunTable where RunMod.RunId == runID select RunMod.directoryPath + "\\" + RunMod.fileName).FirstOrDefault();
+        }
 
         public RunMod getRun(int id)
         {
             return (from RunMod in RunTable 
-                    where RunMod.Id == id 
-                    select RunMod).Include(p => p.targets).FirstOrDefault();
+                    where RunMod.RunId == id 
+                    select RunMod).Include(p => p.results).Include(p => p.targets).Include(p => p.wells).FirstOrDefault();
         }
 
         public InstrumentMod[] getInstruments()
@@ -167,27 +184,11 @@ namespace tangenportalv2.Models
             SaveChanges();
         }
 
-        //public void removeRuns()
-        //{
-        //    foreach(RunMod run in getRuns(1))
-        //    {
-        //        RemoveEntry(run);
-        //    }
-        //}
-
         public RunMod[] getFromInstrument(string instrumentName)
         {
             return (from RunMod in RunTable 
                     where RunMod.instrumentName.Equals(instrumentName) 
                     select RunMod).ToArray();
         }
-
-        //public RunMod[] getWithinTimeFrame(DateTime startDate, DateTime endDate)
-        //{
-        //    return (from RunMod in RunTable
-        //            where Convert.ToDateTime(RunMod.dateTime) >= startDate && Convert.ToDateTime(RunMod.dateTime) <= endDate
-        //            select RunMod).ToArray();
-        //}
-
     }
 }
